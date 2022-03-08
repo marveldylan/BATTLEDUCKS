@@ -47,7 +47,7 @@ function readyUpP2() {
     document.getElementById('P2-display').innerText = `Player 2 Chooses: ${player2Duck}`;
 }
 
-function gameInit() {
+function startGame() {
     location.href = "play.html";
 }
 
@@ -56,6 +56,6 @@ document.getElementById('Player-1-choice').addEventListener('change', changeP1Im
 document.getElementById('Player-2-choice').addEventListener('change', changeP2Image);
 document.getElementById('Ready-p1').addEventListener('click', readyUpP1);
 document.getElementById('Ready-p2').addEventListener('click', readyUpP2);
-document.getElementById('Start-game').addEventListener('click', gameInit);
+document.getElementById('Start-game').addEventListener('click', startGame);
 
 //

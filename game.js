@@ -8,14 +8,18 @@ const player1 = {
     name: 'Player 1',
     // pass data for deck select and profile image
     duck: localStorage.getItem('player1Duck'),
-    deck: []
+    stack: [],
+    deck: [],
+    hand: []
 }
 
 const player2 = {
     name: 'Player 2',
     // pass data for deck select and profile image
     duck: localStorage.getItem('player2Duck'),
-    deck: []
+    stack: [],
+    deck: [],
+    hand: []
 }
 
 // Card Arrays of Objects
@@ -62,7 +66,11 @@ let yellers = [
 
 // Deck Arrays
 
-let duckDecks = [greyDucks, mallards, yellers];
+let duckStacks = {
+    greyDucks: greyDucks, 
+    mallards: mallards , 
+    yellers: yellers
+};
 
 // Team Check and Initializing Game
 gameInit();
@@ -115,7 +123,6 @@ function coinToss() {
         }
         player1.picture = document.getElementById("Player-1-pic-play");
         player1.picture.setAttribute('src', `assets/player-pictures/player-1/${player1.duck}.png`)
-        console.log(player1.duck);
         // Randomly deal cards to each player
         buildP1Deck();
     };
@@ -135,21 +142,44 @@ function coinToss() {
         player2.picture = document.getElementById("Player-2-pic-play");
         player2.picture.setAttribute('src', `assets/player-pictures/player-2/${player2.duck}.png`)
        // Randomly deal cards to each player
-       console.log(player2.duck);
+       
        buildP2Deck();
     };
 
     function buildP1Deck() {
-        for(let i = 0; i < duckDecks.length; i++) {
-            if(duckDecks[i] === player1.duck) {
-                player1.deck = duckDecks[i]; 
+        // Direction for choosing deck from duckStacks array with for(let[key, value] of Object.entries(object) taken from https://stackoverflow.com/questions/57928690/how-to-display-value-if-key-is-equal-to-variable
+        for (let [key, value] of Object.entries(duckStacks)) {
+            if (key === player1.duck) {
+                player1.stack = value;
+                console.log(player1.stack);
             }
         }
-        console.log('Player1 Deck Built')
+        for (let i = 0; i < 16; i++){
+            //randomly push a value from the selected deck into player 'hand' until 16 cards are held
+            let randomSelect = Math.floor(Math.random()*player1.stack.length);
+            player1.deck.push(player1.stack[randomSelect]);
+        }
+        console.log(player1.stack);
+        console.log(player1.deck);
+        console.log(player1.hand);
     };
 
     function buildP2Deck() {
-        console.log('Player2 Deck Built')
+        // Direction for choosing deck from duckStacks array with for(let[key, value] of Object.entries(object) taken from https://stackoverflow.com/questions/57928690/how-to-display-value-if-key-is-equal-to-variable
+        for (let [key, value] of Object.entries(duckStacks)) {
+            if (key === player2.duck) {
+                player2.stack = value;
+                console.log(player2.stack);
+            }
+        }
+        for (let i = 0; i < 16; i++){
+            //randomly push a value from the selected deck into player 'hand' until 16 cards are held
+            let randomSelect = Math.floor(Math.random()*player2.stack.length);
+            player2.deck.push(player2.stack[randomSelect]);
+        }
+        console.log(player2.stack);
+        console.log(player2.deck);
+        console.log(player2.hand);
     };
 
 // Event Handlers

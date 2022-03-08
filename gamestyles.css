@@ -168,23 +168,23 @@ select option:active, select option:checked:after, select option:focus-visible, 
 
 #Player-1-pic-play {
     float: left;
-    width: 40%;
-    padding-left: 20px;
+    width: 80%;
+    padding: 20px;
 }
 #Player-1-pic-deck {
     float: left;
-    width: 40%;
+    width: 60%;
     padding-left: 20px;
 }
 
 #Player-2-pic-play {
     float: right;
-    width: 40%;
-    padding-left: 20px;
+    width: 80%;
+    padding: 20px;
 }
 #Player-2-pic-deck {
     float: right;
-    width: 40%;
+    width: 60%;
     padding-left: 20px;
 }
 

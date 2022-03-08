@@ -13,6 +13,7 @@ header {
     display: flex;
     justify-content: center;
 }
+
 /*Choose Deck Styling*/
 .column-choose {
     width: 45%;
@@ -23,10 +24,12 @@ header {
 
 .p1-header {
     text-align: center;
+    background-color: aqua;
 }
 
 .p2-header {
     text-align: center;
+    background-color: red;
 }
 
 .player-pic {
@@ -53,6 +56,9 @@ header {
     font-size: x-large;
     border: 4px solid black;
     border-radius: 5px;
+    color: #52f74e;
+    background-color: #201f1f;
+    list-style: none;
 }
 
 #Player-2-choice {
@@ -63,14 +69,49 @@ header {
     font-size: x-large;
     border: 4px solid black;
     border-radius: 5px;
+    color: #52f74e;
+    background-color: #201f1f;
+    list-style: none;
+}
+select option:not(:checked) {
+    background-color: #201f1f;
+}
+
+
+select option:active, select option:checked:after, select option:focus-visible, select option:hover, select option:checked {
+    background-color: #52f74e !important;
+    color: #201f1f !important;
 }
 
 .ready-up {
     display: block;
     margin: 0 auto;
     width: 30%;
-    border: 4px solid black;
+    border: 4px solid darkred;
     border-radius: 5px;
+    background-color: red;
+    color: whitesmoke;
+    font-size: large;
+}
+
+.ready-up:hover {
+    background-color: darkred;
+    border-color: red;
+}
+
+.start {
+    width: 100%;
+    height: 20vh;
+    background-color: green;
+}
+
+#Start-game {
+    display: block;
+    margin: 30px auto;
+    width: 20%;
+    height: 10vh;
+    font-size: x-large;
+
 }
 
 

@@ -1,14 +1,7 @@
 // Global Variables
 let gameRound;
 let currentPlayer;
-// let player1Score;
-// let player2Score;
 let gameStatus = false;
-
-// pass data for deck select and profile image
-// let player1Duck = localStorage.getItem('player1Duck');
-// let player2Duck = localStorage.getItem('player2Duck');
-
 
 // Player Objects
 const player1 = {
@@ -69,7 +62,7 @@ let yellers = [
 
 // Deck Arrays
 
-let duckDecks = ['greyDucks', 'mallards', 'yellers'];
+let duckDecks = [greyDucks, mallards, yellers];
 
 // Team Check and Initializing Game
 gameInit();
@@ -148,7 +141,9 @@ function coinToss() {
 
     function buildP1Deck() {
         for(let i = 0; i < duckDecks.length; i++) {
-
+            if(duckDecks[i] === player1.duck) {
+                player1.deck = duckDecks[i]; 
+            }
         }
         console.log('Player1 Deck Built')
     };

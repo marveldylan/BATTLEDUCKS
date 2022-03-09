@@ -29,12 +29,12 @@ let greyDucks =[
     {
     name: 'angryGreyDuck',
     quacks: 5,
-    imageLink: `assets/cards/GreyDucks/angryGreyDuck.png`
+    imageLink: `assets/cards/greyDucks/angryGreyDuck.png`
 },
 {
     name: 'suspiciousGreyDuck',
     quacks: 2,
-    imageLink: `assets/cards/GreyDucks/suspiciousGreyDuck.png`
+    imageLink: `assets/cards/greyDucks/suspiciousGreyDuck.png`
 }];
 
 // Mallard Cards
@@ -56,12 +56,12 @@ let yellers = [
     {
     name: 'angryYeller',
     quacks: 5,
-    imageLink: `assets/cards/Yellers/angryYeller.png`
+    imageLink: `assets/cards/yellers/angryYeller.png`
 },
 {
     name: 'suspiciousYeller',
     quacks: 2,
-    imageLink: `assets/cards/Yellers/suspiciousYeller.png`
+    imageLink: `assets/cards/yellers/suspiciousYeller.png`
 }];
 
 // Deck Arrays

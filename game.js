@@ -133,15 +133,24 @@ function gameInit() {
 
     // Set current player turn
     coinToss();
+
+    // Begin current player turn
+    startTurn(currentPlayer);
     }
+
 };
 
 // Function to initialize gameboard
 function gameBoardInit() {
+    document.querySelector('.invisible-hand-1').style.opacity = "0";  
+    document.querySelector('.invisible-hand-2').style.opacity = "0";  
+    
     for(let i = 0; i < 20; i++) {
         gameBoard.push(`t${i}`)
     }
     return gameBoard;
+
+
 }
 
 // Function to choose which player goes first
@@ -222,7 +231,7 @@ function renderHand(player) {
         document.querySelector(`.${player.name}-view`).appendChild(cardElement);
         cardElement.appendChild(cardImage);
         cardElement.appendChild(playCard);
-        cardElement.setAttribute("id", `card-element-${i}`);
+        cardElement.setAttribute("id", `${player.name}-card-element-${i}`);
         cardElement.setAttribute("draggable", "true");
         cardElement.setAttribute("ondragstart", "dragCard(event)");
         console.log(cardElement);
@@ -234,10 +243,13 @@ function renderHand(player) {
 };
 
 // Function for player move:
-// Direction for dragging cards to grid from https://medium.com/@tatismolin/how-to-implement-drag-and-drop-functionality-using-vanilla-javascript-9ddfe2402695
-function makeMove(currentPlayer) {
+
+function startTurn(player) {
     if (gameStatus === true) {
-        console.log(currentPlayer);
+        console.log(player.name);
+        document.getElementById(`${player.name}-hand`).classList.toggle('invisible-hand');
+        document.getElementById(`${player.name}-draw`).classList.toggle('invisible-hand');
+        document.getElementById(`${player.name}-attack`).classList.toggle('invisible-hand');
     }
 };
 
@@ -246,6 +258,7 @@ function makeMove(currentPlayer) {
 //     if (currentPlayer = )
 // }
 
+// Direction for dragging cards to grid from https://medium.com/@tatismolin/how-to-implement-drag-and-drop-functionality-using-vanilla-javascript-9ddfe2402695
 // Function for transferring dragged card data:
 function dragCard(ev) {
     ev.dataTransfer.setData("text", ev.target.id);
@@ -259,22 +272,15 @@ function dragOverCard(ev) {
 function dropCard(ev) {
     ev.preventDefault();
     let data = ev.dataTransfer.getData("text");
-    console.log(data);
     ev.target.appendChild(document.getElementById(data));
     ev.dataTransfer.clearData();
 }
-
 
 
 // Event Handlers
 //inspiration for hover taken from DOTS lab level winner opacity change, but with added toggle to play
 document.getElementById('Player-1-hand').addEventListener('mouseover', () => {
     document.querySelector('.invisible-hand-1').style.opacity = "1.0";
-    // for(let i = 0; i < player1.hand.length; i++) {
-    //     document.querySelector('.Player-1-view').classList.toggle(`.card-element-${i}`);
-    //     document.querySelector('.Player-1-view').classList.toggle('.invisible-hand-1');
-    // }
-
 });
 document.getElementById('Player-1-hand').addEventListener('mouseout', () => {
     document.querySelector('.invisible-hand-1').style.opacity = "0";   

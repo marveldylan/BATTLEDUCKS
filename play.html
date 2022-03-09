@@ -23,7 +23,10 @@
             <div class="p-tracker">
                 <h3>Tracker</h3>
                 <p class = "p1-score">Score: 0</p>
-                <button id="Player-1-hand">View Hand</button>
+                <h3>Actions:</h3>
+                <button class="invisible-hand" id="Player-1-hand">Play Card</button>
+                <button class="invisible-hand" id="Player-1-draw">Draw</button>
+                <button class="invisible-hand" id="Player-1-attack">Attack</buttion>
             </div>
             <div class="Player-1-view invisible-hand-1">
 
@@ -39,25 +42,25 @@
                 </div>
                 <!--Direction for drag/drop attribute for tiles taken from https://www.w3schools.com/html/tryit.asp?filename=tryhtml5_draganddrop and https://developer.mozilla.org/en-US/docs/Web/API/GlobalEventHandlers/ondragstart-->
                 <div class="tile  player-1-tile  def-tile" id="t0" ondrop="dropCard(event)" ondragover="dragOverCard(event)">T0</div>
-                <div class="tile  player-1-tile  def-tile" id="t1">T1</div>
-                <div class="tile  player-1-tile  def-tile" id="t2">T2</div>
-                <div class="tile  player-1-tile  def-tile" id="t3">T3</div>
-                <div class="tile  player-1-tile  def-tile" id="t4">T4</div>
-                <div class="tile  player-1-tile  atk-tile" id="t5">T5</div>
-                <div class="tile  player-1-tile  atk-tile" id="t6">T6</div>
-                <div class="tile  player-1-tile  atk-tile" id="t7">T7</div>
-                <div class="tile  player-1-tile  atk-tile" id="t8">T8</div>
-                <div class="tile  player-1-tile  atk-tile" id="t9">T9</div>
-                <div class="tile  player-2-tile  atk-tile" id="t10">T10</div>
-                <div class="tile  player-2-tile  atk-tile" id="t11">T11</div>
-                <div class="tile  player-2-tile  atk-tile" id="t12">T12</div>
-                <div class="tile  player-2-tile  atk-tile" id="t13">T13</div>
-                <div class="tile  player-2-tile  atk-tile" id="t14">T14</div>
-                <div class="tile  player-2-tile  def-tile" id="t15">T15</div>
-                <div class="tile  player-2-tile  def-tile" id="t16">T16</div>
-                <div class="tile  player-2-tile  def-tile" id="t17">T17</div>
-                <div class="tile  player-2-tile  def-tile" id="t18">T18</div>
-                <div class="tile  player-2-tile  def-tile" id="t19">T19</div>
+                <div class="tile  player-1-tile  def-tile" id="t1" ondrop="dropCard(event)" ondragover="dragOverCard(event)">T1</div>
+                <div class="tile  player-1-tile  def-tile" id="t2" ondrop="dropCard(event)" ondragover="dragOverCard(event)">T2</div>
+                <div class="tile  player-1-tile  def-tile" id="t3" ondrop="dropCard(event)" ondragover="dragOverCard(event)">T3</div>
+                <div class="tile  player-1-tile  def-tile" id="t4" ondrop="dropCard(event)" ondragover="dragOverCard(event)">T4</div>
+                <div class="tile  player-1-tile  atk-tile" id="t5" ondrop="dropCard(event)" ondragover="dragOverCard(event)">T5</div>
+                <div class="tile  player-1-tile  atk-tile" id="t6" ondrop="dropCard(event)" ondragover="dragOverCard(event)">T6</div>
+                <div class="tile  player-1-tile  atk-tile" id="t7" ondrop="dropCard(event)" ondragover="dragOverCard(event)">T7</div>
+                <div class="tile  player-1-tile  atk-tile" id="t8" ondrop="dropCard(event)" ondragover="dragOverCard(event)">T8</div>
+                <div class="tile  player-1-tile  atk-tile" id="t9" ondrop="dropCard(event)" ondragover="dragOverCard(event)">T9</div>
+                <div class="tile  player-2-tile  atk-tile" id="t10" ondrop="dropCard(event)" ondragover="dragOverCard(event)">T10</div>
+                <div class="tile  player-2-tile  atk-tile" id="t11" ondrop="dropCard(event)" ondragover="dragOverCard(event)">T11</div>
+                <div class="tile  player-2-tile  atk-tile" id="t12" ondrop="dropCard(event)" ondragover="dragOverCard(event)">T12</div>
+                <div class="tile  player-2-tile  atk-tile" id="t13" ondrop="dropCard(event)" ondragover="dragOverCard(event)">T13</div>
+                <div class="tile  player-2-tile  atk-tile" id="t14" ondrop="dropCard(event)" ondragover="dragOverCard(event)">T14</div>
+                <div class="tile  player-2-tile  def-tile" id="t15" ondrop="dropCard(event)" ondragover="dragOverCard(event)">T15</div>
+                <div class="tile  player-2-tile  def-tile" id="t16" ondrop="dropCard(event)" ondragover="dragOverCard(event)">T16</div>
+                <div class="tile  player-2-tile  def-tile" id="t17" ondrop="dropCard(event)" ondragover="dragOverCard(event)">T17</div>
+                <div class="tile  player-2-tile  def-tile" id="t18" ondrop="dropCard(event)" ondragover="dragOverCard(event)">T18</div>
+                <div class="tile  player-2-tile  def-tile" id="t19" ondrop="dropCard(event)" ondragover="dragOverCard(event)">T19</div>
                 <div class="game-footer">
                     <!--Direction for audio controls taken from https://www.w3schools.com/tags/tag_audio.asp-->
                     <audio controls>Your browser does not support audio controls.</audio>
@@ -71,7 +74,10 @@
                 <div class="p-tracker">
                     <h3>Tracker</h3>
                     <p class = "p2-score">Score: 0</p>
-                    <button id="Player-2-hand">View Hand</button>
+                    <h3>Actions:</h3>
+                    <button class="invisible-hand" id="Player-2-hand">Play Card</button>
+                    <button class="invisible-hand" id="Player-2-draw">Draw</button>
+                    <button class="invisible-hand" id="Player-2-attack">Attack</buttion>
                 </div>
                 <div class="p-profile">
                     <img src ="assets/player-pictures/Player-2/Login.png" class="player-pic" id="Player-2-pic-play">

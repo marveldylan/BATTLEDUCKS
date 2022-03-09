@@ -187,7 +187,15 @@ select option:active, select option:checked:after, select option:focus-visible, 
         opacity: 1;
 }
 
+.invisible-hand {
+    opacity: 0;
+}
+
 .invisible-hand-1 {
+    opacity: 0;
+}
+
+.invisible-hand-2 {
     opacity: 0;
 }
 
@@ -199,9 +207,6 @@ select option:active, select option:checked:after, select option:focus-visible, 
         opacity: 1;
 }
 
-.invisible-hand-2 {
-    opacity: 0;
-}
 
 .card-element {
     border: 1px solid gray;

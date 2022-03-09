@@ -29,12 +29,12 @@ let greyDucks =[
     {
     name: 'angryGreyDuck',
     quacks: 5,
-    imageLink: `assets/cards/GreyDucks/${this.name}.png`
+    imageLink: `assets/cards/GreyDucks/angryGreyDuck.png`
 },
 {
     name: 'suspiciousGreyDuck',
     quacks: 2,
-    imageLink: `assets/cards/GreyDucks/${this.name}.png`
+    imageLink: `assets/cards/GreyDucks/suspiciousGreyDuck.png`
 }];
 
 // Mallard Cards
@@ -42,12 +42,12 @@ let mallards = [
     {
     name: 'angryMallard',
     quacks: 5,
-    imageLink: `assets/cards/Mallards/${this.name}.png`
+    imageLink: `assets/cards/mallards/angryMallard.png`
 },
 {
     name: 'suspiciousMallard',
     quacks: 2,
-    imageLink: `assets/cards/Mallards/${this.name}.png`
+    imageLink: `assets/cards/mallards/suspiciousMallard.png`
 }];
 
 // Yeller Cards
@@ -56,12 +56,12 @@ let yellers = [
     {
     name: 'angryYeller',
     quacks: 5,
-    imageLink: `assets/cards/Yeller/${this.name}.png`
+    imageLink: `assets/cards/Yellers/angryYeller.png`
 },
 {
     name: 'suspiciousYeller',
     quacks: 2,
-    imageLink: `assets/cards/Yeller/${this.name}.png`
+    imageLink: `assets/cards/Yellers/suspiciousYeller.png`
 }];
 
 // Deck Arrays
@@ -160,6 +160,47 @@ function buildDeck(player) {
 };
 
 // Function that Renders player hands
+// Inspiration for renderHand taken from my solution to TMDP_API Lab
+function renderHand(player) {
+    let hand = player.hand;
+    
+    for(let i = 0; i < hand.length; i++) {
+        let cardElement = document.createElement('div');
+        let cardImage = document.createElement('div');
+        let playCard = document.createElement('button');
+        cardElement.innerHTML = `${hand[i].name}, Quacks:${hand[i].quacks}`;
+        cardElement.classList.add(`card-element`);
+        cardElement.classList.add(`card-element-${i}`);
+        cardImage.innerHTML = `<img class='card-image' src=${hand[i].imageLink}>`;
+        playCard.innerHTML = 'Play Card';
+        document.querySelector(`.${player.name}-view`).appendChild(cardElement);
+        cardElement.appendChild(cardImage);
+        cardElement.appendChild(playCard);
 
+        // playCard.addEventListener('click', () => {
+
+        // })
+    }
+
+};
 
 // Event Handlers
+//inspiration for hover taken from DOTS lab level winner opacity change, but with added toggle to play
+document.getElementById('Player-1-hand').addEventListener('mouseover', () => {
+    document.querySelector('.invisible-hand-1').style.opacity = "1.0";
+});
+document.getElementById('Player-1-hand').addEventListener('mouseout', () => {
+    document.querySelector('.invisible-hand-1').style.opacity = "0";
+});
+document.getElementById('Player-1-hand').addEventListener('click', () => {
+    document.querySelector('.Player-1-view').classList.toggle('invisible-hand-1');
+});
+document.getElementById('Player-2-hand').addEventListener('mouseover', () => {
+    document.querySelector('.invisible-hand-2').style.opacity = "1.0";
+});
+document.getElementById('Player-2-hand').addEventListener('mouseout', () => {
+    document.querySelector('.invisible-hand-2').style.opacity = "0";
+});
+document.getElementById('Player-2-hand').addEventListener('click', () => {
+    document.querySelector('.Player-2-view').classList.toggle('invisible-hand-2');
+});

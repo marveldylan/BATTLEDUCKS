@@ -276,11 +276,11 @@ select option:active, select option:checked:after, select option:focus-visible, 
     border: 2px solid blue;
 }
 
-.player-1-tile {
+.Player-1-tile {
     background-color: lightblue;
 }
 
-.player-2-tile {
+.Player-2-tile {
     background-color: lightcoral;
 }
 

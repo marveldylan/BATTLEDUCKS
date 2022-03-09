@@ -241,9 +241,6 @@ function renderHand(player) {
         cardElement.setAttribute("draggable", "true");
         cardElement.setAttribute("ondragstart", "dragCard(event)");
         console.log(cardElement);
-        // playCard.addEventListener('click', () => {
-
-        // })
     }
 
 };
@@ -263,45 +260,73 @@ function startTurn(player) {
 };
 
 // Function if play card is selected
-function playCard() {
-
+function LayCard() {
+    console.log(currentPlayer.hand);
 
     //add end turn / player switch function
+    endTurn();
 };
 
 // Function to draw card
 function drawCard() {
-
+    // draw card. Check to see if < 6 - pop from deck, push to hand., else can't draw.f
     //add end turn / player switch function
+    endTurn();
 };
 
 // Function to ATTACK!
 function attack() {
+    // look for any cards on the board
 
     //add end turn / player switch function
+    endTurn();
 };
 
+// Function to end turn, save changes to board:
+function endTurn() {
+
+    changePlayer();
+}
 // Function to change currentPlayer after every move:
-// function changePlayer () {
-//     if (currentPlayer = )
-// }
+function changePlayer () {
+    // switch current player
+    if (currentPlayer === player1) {
+        currentPlayer = player2;
+    } else if (currentPlayer === player2) {
+        currentPlayer = player1;
+    }
+    // start turn for next player
+    startTurn(currentPlayer);
+}
 
 // Direction for dragging cards to grid from https://medium.com/@tatismolin/how-to-implement-drag-and-drop-functionality-using-vanilla-javascript-9ddfe2402695
 // Function for transferring dragged card data:
-function dragCard(ev) {
-    ev.dataTransfer.setData("text", ev.target.id);
+function dragCard(cardElement) {
+    cardElement.dataTransfer.setData("text", cardElement.target.id);
 }
 // Function for card dragover game board tiles
-function dragOverCard(ev) {
-    ev.preventDefault();
+function dragOverCard(cardElement) {
+    cardElement.preventDefault();
 }
 
 // Function for card drop to game board tile
-function dropCard(ev) {
-    ev.preventDefault();
-    let data = ev.dataTransfer.getData("text");
-    ev.target.appendChild(document.getElementById(data));
-    ev.dataTransfer.clearData();
+function dropCard(cardElement) {
+    cardElement.preventDefault();
+    if(cardElement.target.classList.contains(`${currentPlayer.name}-tile`) === true){
+        let data = cardElement.dataTransfer.getData("text");
+        cardElement.target.appendChild(document.getElementById(data));
+        cardElement.dataTransfer.clearData();
+        cardId = cardElement.srcElement.firstElementChild.id;
+        for(let i = 0; i < 6; i++) {
+            if (cardId ===`${currentPlayer.name}-card-element-${i}`) {
+                currentPlayer.hand.splice(i, 1, 'empty');
+                console.log(currentPlayer.hand);
+            } else {
+                console.log(`Can't get card id`);
+            }
+        }
+    endTurn();
+    }
 }
 
 
@@ -329,5 +354,3 @@ document.getElementById('Player-2-hand').addEventListener('mouseout', () => {
 document.getElementById('Player-2-hand').addEventListener('click', () => {
     document.querySelector('.Player-2-view').classList.toggle('invisible-hand-2');
 });
-
-document.querySelectorAll('.card-element')

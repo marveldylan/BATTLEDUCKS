@@ -136,15 +136,21 @@ function gameInit() {
 
     // Begin current player turn
     startTurn(currentPlayer);
-    }
+    };
 
 };
 
 // Function to initialize gameboard
 function gameBoardInit() {
     document.querySelector('.invisible-hand-1').style.opacity = "0";  
-    document.querySelector('.invisible-hand-2').style.opacity = "0";  
-    
+    document.querySelector('.invisible-hand-2').style.opacity = "0";
+    document.getElementById(`${player1.name}-hand`).disabled = true;
+    document.getElementById(`${player1.name}-draw`).disabled = true;
+    document.getElementById(`${player1.name}-attack`).disabled = true;
+    document.getElementById(`${player2.name}-hand`).disabled = true;
+    document.getElementById(`${player2.name}-draw`).disabled = true;
+    document.getElementById(`${player2.name}-attack`).disabled = true;
+
     for(let i = 0; i < 20; i++) {
         gameBoard.push(`t${i}`)
     }
@@ -247,10 +253,32 @@ function renderHand(player) {
 function startTurn(player) {
     if (gameStatus === true) {
         console.log(player.name);
+        document.getElementById(`${player.name}-hand`).disabled = false;
+        document.getElementById(`${player.name}-draw`).disabled = false;
+        document.getElementById(`${player.name}-attack`).disabled = false;
         document.getElementById(`${player.name}-hand`).classList.toggle('invisible-hand');
         document.getElementById(`${player.name}-draw`).classList.toggle('invisible-hand');
         document.getElementById(`${player.name}-attack`).classList.toggle('invisible-hand');
     }
+};
+
+// Function if play card is selected
+function playCard() {
+
+
+    //add end turn / player switch function
+};
+
+// Function to draw card
+function drawCard() {
+
+    //add end turn / player switch function
+};
+
+// Function to ATTACK!
+function attack() {
+
+    //add end turn / player switch function
 };
 
 // Function to change currentPlayer after every move:

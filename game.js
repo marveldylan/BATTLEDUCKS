@@ -1,7 +1,35 @@
 // Global Variables
 let gameRound;
 let currentPlayer;
+let hand;
+let cardElement;
+let cardImage;
+let playCard;
 let gameStatus = false;
+
+let t0 = document.getElementById('t0');
+let t1 = document.getElementById('t1');
+let t2 = document.getElementById('t2');
+let t3 = document.getElementById('t3');
+let t4 = document.getElementById('t4');
+let t5 = document.getElementById('t5');
+let t6 = document.getElementById('t6');
+let t7 = document.getElementById('t7');
+let t8 = document.getElementById('t8');
+let t9 = document.getElementById('t9');
+let t10 = document.getElementById('t10');
+let t11 = document.getElementById('t11');
+let t12 = document.getElementById('t12');
+let t13 = document.getElementById('t13');
+let t14 = document.getElementById('Tt14');
+let t15 = document.getElementById('t15');
+let t16 = document.getElementById('t16');
+let t17 = document.getElementById('t17');
+let t18 = document.getElementById('t18');
+let t19 = document.getElementById('t19');
+
+const gameBoard =[];
+
 
 // Player Objects
 const player1 = {
@@ -28,12 +56,14 @@ const player2 = {
 let greyDucks =[
     {
     name: 'angryGreyDuck',
-    quacks: 5,
+    attack: 5,
+    defense: 1,
     imageLink: `assets/cards/greyDucks/angryGreyDuck.png`
 },
 {
     name: 'suspiciousGreyDuck',
-    quacks: 2,
+    attack: 3,
+    defense: 2,
     imageLink: `assets/cards/greyDucks/suspiciousGreyDuck.png`
 }];
 
@@ -41,12 +71,14 @@ let greyDucks =[
 let mallards = [ 
     {
     name: 'angryMallard',
-    quacks: 5,
+    attack: 5,
+    defense: 1,
     imageLink: `assets/cards/mallards/angryMallard.png`
 },
 {
     name: 'suspiciousMallard',
-    quacks: 2,
+    attack: 3,
+    defense: 2,
     imageLink: `assets/cards/mallards/suspiciousMallard.png`
 }];
 
@@ -55,12 +87,14 @@ let mallards = [
 let yellers = [
     {
     name: 'angryYeller',
-    quacks: 5,
+    attack: 5,
+    defense: 1,
     imageLink: `assets/cards/yellers/angryYeller.png`
 },
 {
     name: 'suspiciousYeller',
-    quacks: 2,
+    attack: 3,
+    defense: 2,
     imageLink: `assets/cards/yellers/suspiciousYeller.png`
 }];
 
@@ -68,7 +102,7 @@ let yellers = [
 
 let duckStacks = {
     greyDucks: greyDucks, 
-    mallards: mallards , 
+    mallards: mallards, 
     yellers: yellers
 };
 
@@ -89,6 +123,9 @@ function gameInit() {
     // Set Rounds to 1
     gameRound = 1;
 
+    // Initialize gameboard
+    gameBoardInit();
+
     // Look at tic-tac-toe for basics
     // Choose Deck based on team
     buildProfile(player1);
@@ -99,6 +136,14 @@ function gameInit() {
     }
 };
 
+// Function to initialize gameboard
+function gameBoardInit() {
+    for(let i = 0; i < 20; i++) {
+        gameBoard.push(`t${i}`)
+    }
+    return gameBoard;
+}
+
 // Function to choose which player goes first
 function coinToss() {
     let headsOrTails = Math.random();
@@ -107,7 +152,8 @@ function coinToss() {
     } else {
         currentPlayer = player2;
     }
-    console.log(`${currentPlayer.name}: ${currentPlayer.duck} go first`);
+
+    document.getElementById('Game-round').innerText = `${currentPlayer.name}: ${currentPlayer.duck} go first`;
 }
 
 // Function to build player profiles. Player object is passed through to build deck and render hand.
@@ -162,13 +208,13 @@ function buildDeck(player) {
 // Function that Renders player hands
 // Inspiration for renderHand taken from my solution to TMDP_API Lab
 function renderHand(player) {
-    let hand = player.hand;
+    hand = player.hand;
     
     for(let i = 0; i < hand.length; i++) {
-        let cardElement = document.createElement('div');
-        let cardImage = document.createElement('div');
-        let playCard = document.createElement('button');
-        cardElement.innerHTML = `${hand[i].name}, Quacks:${hand[i].quacks}`;
+        cardElement = document.createElement('div');
+        cardImage = document.createElement('div');
+        playCard = document.createElement('button');
+        cardElement.innerHTML = `${hand[i].name}, ATK: ${hand[i].attack}, DEF: ${hand[i].defense}`;
         cardElement.classList.add(`card-element`);
         cardElement.classList.add(`card-element-${i}`);
         cardImage.innerHTML = `<img class='card-image' src=${hand[i].imageLink}>`;
@@ -176,7 +222,10 @@ function renderHand(player) {
         document.querySelector(`.${player.name}-view`).appendChild(cardElement);
         cardElement.appendChild(cardImage);
         cardElement.appendChild(playCard);
-
+        cardElement.setAttribute("id", `card-element-${i}`);
+        cardElement.setAttribute("draggable", "true");
+        cardElement.setAttribute("ondragstart", "dragCard(event)");
+        console.log(cardElement);
         // playCard.addEventListener('click', () => {
 
         // })
@@ -184,16 +233,58 @@ function renderHand(player) {
 
 };
 
+// Function for player move:
+// Direction for dragging cards to grid from https://medium.com/@tatismolin/how-to-implement-drag-and-drop-functionality-using-vanilla-javascript-9ddfe2402695
+function makeMove(currentPlayer) {
+    if (gameStatus === true) {
+        console.log(currentPlayer);
+    }
+};
+
+// Function to change currentPlayer after every move:
+// function changePlayer () {
+//     if (currentPlayer = )
+// }
+
+// Function for transferring dragged card data:
+function dragCard(ev) {
+    ev.dataTransfer.setData("text", ev.target.id);
+}
+// Function for card dragover game board tiles
+function dragOverCard(ev) {
+    ev.preventDefault();
+}
+
+// Function for card drop to game board tile
+function dropCard(ev) {
+    ev.preventDefault();
+    let data = ev.dataTransfer.getData("text");
+    console.log(data);
+    ev.target.appendChild(document.getElementById(data));
+    ev.dataTransfer.clearData();
+}
+
+
+
 // Event Handlers
 //inspiration for hover taken from DOTS lab level winner opacity change, but with added toggle to play
 document.getElementById('Player-1-hand').addEventListener('mouseover', () => {
     document.querySelector('.invisible-hand-1').style.opacity = "1.0";
+    // for(let i = 0; i < player1.hand.length; i++) {
+    //     document.querySelector('.Player-1-view').classList.toggle(`.card-element-${i}`);
+    //     document.querySelector('.Player-1-view').classList.toggle('.invisible-hand-1');
+    // }
+
 });
 document.getElementById('Player-1-hand').addEventListener('mouseout', () => {
-    document.querySelector('.invisible-hand-1').style.opacity = "0";
+    document.querySelector('.invisible-hand-1').style.opacity = "0";   
+    // document.querySelector('.Player-1-view').classList.toggle(`.card-element-${i}`);
+    // document.querySelector('.Player-1-view').classList.toggle('.invisible-hand-1');
 });
 document.getElementById('Player-1-hand').addEventListener('click', () => {
     document.querySelector('.Player-1-view').classList.toggle('invisible-hand-1');
+    // document.querySelector('.Player-1-view').classList.toggle(`.card-element-${i}`);
+    // document.querySelector('.Player-1-view').classList.toggle('.invisible-hand-1');
 });
 document.getElementById('Player-2-hand').addEventListener('mouseover', () => {
     document.querySelector('.invisible-hand-2').style.opacity = "1.0";
@@ -204,3 +295,5 @@ document.getElementById('Player-2-hand').addEventListener('mouseout', () => {
 document.getElementById('Player-2-hand').addEventListener('click', () => {
     document.querySelector('.Player-2-view').classList.toggle('invisible-hand-2');
 });
+
+document.querySelectorAll('.card-element')

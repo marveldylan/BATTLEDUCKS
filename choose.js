@@ -15,7 +15,7 @@ function changeP1Image() {
     let idx = duckList.selectedIndex;
     let duckImageName = duckList[idx].value;
     let playerPic = document.getElementById("Player-1-pic");
-    playerPic.setAttribute('src', `assets/player-pictures/player-1/${duckImageName}.png`)
+    playerPic.setAttribute('src', `assets/player-pictures/Player-1/${duckImageName}.png`)
 
 }
 
@@ -24,7 +24,7 @@ function changeP2Image() {
     let idx = duckList.selectedIndex;
     let duckImageName = duckList[idx].value;
     let playerPic = document.getElementById("Player-2-pic");
-    playerPic.setAttribute('src', `assets/player-pictures/player-2/${duckImageName}.png`)
+    playerPic.setAttribute('src', `assets/player-pictures/Player-2/${duckImageName}.png`)
 }
 
 function readyUpP1() {

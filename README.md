@@ -59,3 +59,4 @@
 ## ***Credits***
 ### **SITE / GAME BOARD MOCK-UPS BUILT WITH: [FIGMA](https://www.figma.com/)**
 ### **ASSET MOCK-UPS BUILT WITH: [PISKEL](https://www.piskelapp.com/) & [GRAVIT](https://www.designer.io/en/)**
+### **Blank AUDIO FILE (CHROME AUTOPLAY) / [anars github](https://github.com/anars/blank-audio/blob/master/250-milliseconds-of-silence.mp3)**

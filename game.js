@@ -7,6 +7,8 @@ let gameTurn;
 let gameStatus = false;
 let cardAttack;
 let cardDefense;
+let fightMusic = new Audio('/assets/audio-files/sejifuji.wav');
+fightMusic.play();
 
 
 let t0 = document.getElementById('t0');

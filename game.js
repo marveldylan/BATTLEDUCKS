@@ -4,6 +4,8 @@ let hand;
 let cardElement;
 let cardImage;
 let gameStatus = false;
+let cardAttack;
+let cardDefense;
 
 
 let t0 = document.getElementById('t0');
@@ -34,7 +36,9 @@ const gameBoard =[];
 const player1 = {
     name: 'Player-1',
     class: '1',
-    health: 10,
+    attack: 0,
+    defense: 0,
+    score: 0,
     // pass data for deck select and profile image
     faction: localStorage.getItem('player1Duck'),
     stack: [],
@@ -45,7 +49,9 @@ const player1 = {
 const player2 = {
     name: 'Player-2',
     class: '2',
-    health: 10,
+    attack: 0,
+    defense: 0,
+    score: 0,
     // pass data for deck select and profile image
     faction: localStorage.getItem('player2Duck'),
     stack: [],
@@ -68,7 +74,6 @@ class Deck {
     createDeck() {
         for(let i = 0; i < this.types.length; i++) {
             let cardType = this.types[i];
-            console.log(`Card Type i: ${cardType}`);
             this.deck.push(cardType);
             // for(let i = 0; i < cardType.count; i++) {
             //     // cardType.id = `${playerClass}-${playerCardId}`;
@@ -142,10 +147,6 @@ function gameInit() {
     if(player1.faction !== null && player2.faction !== null) {
     gameStatus = true;
 
-    // Set player Scores to 0;
-    player1.score = 0;
-    player2.score = 0;
-
     // Initialize gameboard
     gameBoardInit();
 
@@ -168,10 +169,8 @@ function gameBoardInit() {
     document.querySelector('.invisible-hand-2').style.opacity = "0";
     document.getElementById(`${player1.name}-hand`).disabled = true;
     document.getElementById(`${player1.name}-draw`).disabled = true;
-    document.getElementById(`${player1.name}-attack`).disabled = true;
     document.getElementById(`${player2.name}-hand`).disabled = true;
     document.getElementById(`${player2.name}-draw`).disabled = true;
-    document.getElementById(`${player2.name}-attack`).disabled = true;
 
     for(let i = 0; i < 20; i++) {
         gameBoard.push(`t${i}`)
@@ -256,7 +255,7 @@ function renderHand(player) {
         // cardElement.innerHTML = `${hand[i].name}, ATK: ${hand[i].attack}, DEF: ${hand[i].defense}`;
         cardElement.classList.add(`card-element`);
         cardElement.classList.add(`card-element-${i}`);
-        cardElement.innerHTML = `<img class='card-image' src=${hand[i].imageLink}>`;
+        cardElement.innerHTML = `<div  data-attack='${hand[i].attack}' data-defense = '${hand[i].defense}' ><img class='card-image' src=${hand[i].imageLink}></div>`;
         // attack.innerHTML = 'attack';
         document.querySelector(`.${player.name}-view`).appendChild(cardElement);
         // cardElement.appendChild(cardImage);
@@ -265,8 +264,8 @@ function renderHand(player) {
         cardElement.setAttribute("id", `${player.name}-card-element-${i}`);
         cardElement.setAttribute("draggable", "true");
         cardElement.setAttribute("ondragstart", "dragCard(event)");
-        cardElement.setAttribute('attack', `${hand[i].attack}`);
-        cardElement.setAttribute('defense', `${hand[i].defense}`);
+        // cardElement.setAttribute('attack', `${hand[i].attack}`);
+        // cardElement.setAttribute('defense', `${hand[i].defense}`);
     }
 
 };
@@ -291,60 +290,18 @@ function startTurn(player) {
         // console.log(player.class);
         document.getElementById(`${player.name}-hand`).disabled = false;
         document.getElementById(`${player.name}-draw`).disabled = false;
-        document.getElementById(`${player.name}-attack`).disabled = false;
         document.getElementById(`${player.name}-hand`).classList.toggle('invisible-hand');
         document.getElementById(`${player.name}-draw`).classList.toggle('invisible-hand');
-        document.getElementById(`${player.name}-attack`).classList.toggle('invisible-hand');
     }
 };
-
-// Function to draw card
-// Direction to use Objects.keys length taken from https://stackoverflow.com/questions/31065075/array-length-gives-incorrect-length
-const drawCard = () => {
-    if(Object.keys(player1.hand).length < 6) {
-        console.log(`${currentPlayer} hand length is ${currentPlayer.hand.length}`)
-        for(let i = 0; i < 6; i++) {
-            if(player.hand[i] === "empty") {
-                // push card from deck to hand
-                player.hand.push(player.deck[0])
-                player.deck.splice(0, 1);
-
-                // render card on gameboard:
-                cardElement = document.createElement('div');
-                cardElement.classList.add(`card-element`);
-                cardElement.classList.add(`card-element-${i}`);
-                cardElement.innerHTML = `<img class='card-image' src=${hand[i].imageLink}>`;
-                document.querySelector(`.${player.name}-view`).appendChild(cardElement);
-                cardElement.setAttribute("id", `${player.name}-card-element-${i}`);
-                cardElement.setAttribute("draggable", "true");
-                cardElement.setAttribute("ondragstart", "dragCard(event)");
-                cardElement.setAttribute('attack', `${hand[i].attack}`);
-                cardElement.setAttribute('defense', `${hand[i].defense}`);
-            }
-        }
-        endTurn();
-    } else {
-        console.log(`${currentPlayer.name} hand length is 6`)
-    }
-    endTurn();
-};
-
-// Function to ATTACK!
-function cardAttack() {
-    // look for any cards on the board
-
-    //add end turn / player switch function
-    endTurn();
-};
+ 
 
 // Function to end turn, save changes to board:
 function endTurn() {
     document.getElementById(`${currentPlayer.name}-hand`).disabled = true;
     document.getElementById(`${currentPlayer.name}-draw`).disabled = true;
-    document.getElementById(`${currentPlayer.name}-attack`).disabled = true;
     document.getElementById(`${currentPlayer.name}-hand`).classList.toggle('invisible-hand');
     document.getElementById(`${currentPlayer.name}-draw`).classList.toggle('invisible-hand');
-    document.getElementById(`${currentPlayer.name}-attack`).classList.toggle('invisible-hand');
 
     if(document.getElementById(`${currentPlayer.name}-view`).classList.contains(`invisible-hand-${currentPlayer.class}`) !== true) {
         document.querySelector(`.${currentPlayer.name}-view`).classList.toggle(`invisible-hand-${currentPlayer.class}`);
@@ -363,7 +320,7 @@ function changePlayer () {
         currentPlayer = player1;
     }
     // display on board
-    document.getElementById('Game-round').innerText = `${currentPlayer.name}: ${currentPlayer.duck}' Turn`;
+    document.getElementById('Game-round').innerText = `${currentPlayer.name}: ${currentPlayer.faction}' Turn`;
     // start turn for next player
     startTurn(currentPlayer);
 }
@@ -372,7 +329,10 @@ function changePlayer () {
 // Function for transferring dragged card data:
 function dragCard(cardElement) {
     cardElement.dataTransfer.setData("text", cardElement.target.id);
+    cardAttack = cardElement.target.firstElementChild.dataset.attack;
+    cardDefense = cardElement.target.firstElementChild.dataset.defense;
 }
+// cardElement.target.id
 // Function for card dragover game board tiles
 function dragOverCard(cardElement) {
     cardElement.preventDefault();
@@ -380,6 +340,7 @@ function dragOverCard(cardElement) {
 
 // Function for card drop to game board tile
 function dropCard(cardElement) {
+    // Add attributes to make cards draggable
     cardElement.preventDefault();
     if(cardElement.target.classList.contains(`${currentPlayer.name}-tile`) === true){
         let data = cardElement.dataTransfer.getData("text");
@@ -387,6 +348,9 @@ function dropCard(cardElement) {
         cardElement.dataTransfer.clearData();
         cardId = cardElement.srcElement.firstElementChild.id;
         console.log(`card id is: ${cardId}`);
+ 
+
+        // remove card from player hand
         for(let i = 0; i < 6; i++) {
             if (cardId ===`${currentPlayer.name}-card-element-${i}`) {
                 currentPlayer.hand.splice(i, 1, 'empty');
@@ -395,15 +359,36 @@ function dropCard(cardElement) {
                 // console.log(`Can't get card id`);
             }
         }
+                
+        // update game board
         let cardTile = cardElement.target.id;
         let cardData = cardElement.target.firstElementChild.innerHTML;
-        // update game board
+
+        console.log(`Card Attack is ${cardAttack}`);
+        console.log(`Card Defense is ${cardDefense}`);
+
         for(let i = 0; i < 20; i++){
             if(cardTile === gameBoard[i]) {
                 gameBoard[i] = cardData;
             }
         }
         console.log(gameBoard);
+
+        // Add attack and defense to current player to calculate current score:
+        if( document.getElementById(cardTile).classList.contains('atk-tile') === true) {
+            currentPlayer.attack += parseInt(cardAttack);
+            document.querySelector(`.${currentPlayer.name}-attack`).innerText = `ATTACK: ${currentPlayer.attack}`;
+        } else if ( document.getElementById(cardTile).classList.contains('def-tile') === true) {
+            currentPlayer.defense += parseInt(cardDefense);
+            document.querySelector(`.${currentPlayer.name}-defense`),innerText = `DEFENSE: ${currentPlayer.defense}`;
+        } else {
+            console.log('we have a problem');
+        }
+        console.log(cardTile);
+        console.log(cardData);
+        console.log(currentPlayer.name)
+        console.log(currentPlayer.defense);
+ 
         endTurn();
     }
 }
@@ -453,7 +438,7 @@ document.getElementById('Player-1-draw').addEventListener('click', ()=> {
             cardElement = document.createElement('div');
             cardElement.classList.add(`card-element`);
             cardElement.classList.add(`card-element-${i}`);
-            cardElement.innerHTML = `<img class='card-image' src=${player1.hand[i].imageLink}>`;
+            cardElement.innerHTML = `<div data-attack='${player1.hand[i].attack}' data-defense = '${player1.hand[i].defense}' ><img class='card-image' src=${player1.hand[i].imageLink}></div>`;
             document.querySelector(`.${player1.name}-view`).appendChild(cardElement);
             cardElement.setAttribute("id", `${player1.name}-card-element-${i}`);
             cardElement.setAttribute("draggable", "true");
@@ -476,13 +461,13 @@ document.getElementById('Player-2-draw').addEventListener('click', ()=> {
             cardElement = document.createElement('div');
             cardElement.classList.add(`card-element`);
             cardElement.classList.add(`card-element-${i}`);
-            cardElement.innerHTML = `<img class='card-image' src=${player1.hand[i].imageLink}>`;
+            cardElement.innerHTML = `<div  data-attack='${player2.hand[i].attack}' data-defense = '${player2.hand[i].defense}' ><img class='card-image' src=${player2.hand[i].imageLink}></div>`;
             document.querySelector(`.${player2.name}-view`).appendChild(cardElement);
             cardElement.setAttribute("id", `${player2.name}-card-element-${i}`);
             cardElement.setAttribute("draggable", "true");
             cardElement.setAttribute("ondragstart", "dragCard(event)");
-            cardElement.setAttribute('attack', `${player2.hand[i].attack}`);
-            cardElement.setAttribute('defense', `${player2.hand[i].defense}`);
+            // cardElement.setAttribute('attack', `${player2.hand[i].attack}`);
+            // cardElement.setAttribute('defense', `${player2.hand[i].defense}`);
             endTurn();
         }
     }

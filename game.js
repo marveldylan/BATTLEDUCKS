@@ -4,8 +4,10 @@ let currentPlayer;
 let hand;
 let cardElement;
 let cardImage;
-let playCard;
+let cardNum = 0;
 let gameStatus = false;
+// let attack;
+
 
 let t0 = document.getElementById('t0');
 let t1 = document.getElementById('t1');
@@ -215,6 +217,7 @@ function buildDeck(player) {
         //randomly push a value from the selected deck into player 'hand' until 16 cards are held
         let randomSelect = Math.floor(Math.random()*player.stack.length);
         player.deck.push(player.stack[randomSelect]);
+        // add total card number
     }
 };
 
@@ -225,22 +228,37 @@ function renderHand(player) {
     
     for(let i = 0; i < hand.length; i++) {
         cardElement = document.createElement('div');
-        cardImage = document.createElement('div');
-        playCard = document.createElement('button');
-        cardElement.innerHTML = `${hand[i].name}, ATK: ${hand[i].attack}, DEF: ${hand[i].defense}`;
+        // cardImage = document.createElement('div');
+        // attack = document.createElement('button');
+        // cardElement.innerHTML = `${hand[i].name}, ATK: ${hand[i].attack}, DEF: ${hand[i].defense}`;
         cardElement.classList.add(`card-element`);
         cardElement.classList.add(`card-element-${i}`);
-        cardImage.innerHTML = `<img class='card-image' src=${hand[i].imageLink}>`;
-        playCard.innerHTML = 'Play Card';
+        cardElement.innerHTML = `<img class='card-image' src=${hand[i].imageLink}>`;
+        // attack.innerHTML = 'attack';
         document.querySelector(`.${player.name}-view`).appendChild(cardElement);
-        cardElement.appendChild(cardImage);
-        cardElement.appendChild(playCard);
+        // cardElement.appendChild(cardImage);
+        // cardElement.style.backgroundImage = `url(${hand[i].imageLink})`;
+        // cardElement.appendChild(playCard);
         cardElement.setAttribute("id", `${player.name}-card-element-${i}`);
         cardElement.setAttribute("draggable", "true");
         cardElement.setAttribute("ondragstart", "dragCard(event)");
+        cardElement.setAttribute('attack', `${hand[i].attack}`);
+        cardElement.setAttribute('defense', `${hand[i].defense}`);
     }
 
 };
+
+function renderHand2(player, num) {
+    hand = player.hand;
+    for(let i = 0; i < num; i++) {
+        cardElement = document.createElement('div');
+        attack = document.createElement('button');
+        cardElement.classList.add(`card-element`);
+        cardElement.setAttribute('attack', `${hand[i].attack}`);
+        cardElement.setAttribute('defense', `${hand[i].defense}`);
+
+    }
+}
 
 // Function for player move:
 
@@ -257,14 +275,6 @@ function startTurn(player) {
     }
 };
 
-// Function if play card is selected
-function LayCard() {
-    console.log(currentPlayer.hand);
-
-    //add end turn / player switch function
-    endTurn();
-};
-
 // Function to draw card
 function drawCard() {
     // draw card. Check to see if < 6 - pop from deck, push to hand., else can't draw.f
@@ -273,7 +283,7 @@ function drawCard() {
 };
 
 // Function to ATTACK!
-function attack() {
+function cardAttack() {
     // look for any cards on the board
 
     //add end turn / player switch function
@@ -310,6 +320,8 @@ function changePlayer () {
     } else if (currentPlayer === player2) {
         currentPlayer = player1;
     }
+    // display on board
+    document.getElementById('Game-round').innerText = `${currentPlayer.name}: ${currentPlayer.duck}' Turn`;
     // start turn for next player
     startTurn(currentPlayer);
 }
@@ -340,8 +352,15 @@ function dropCard(cardElement) {
                 // console.log(`Can't get card id`);
             }
         }
-        // console.log(cardElement.target.id);
-        // console.log(cardElement.target.firstElementChild.innerHTML);
+        let cardTile = cardElement.target.id;
+        let cardData = cardElement.target.firstElementChild.innerHTML;
+        // update game board
+        for(let i = 0; i < 20; i++){
+            if(cardTile === gameBoard[i]) {
+                gameBoard[i] = cardData;
+            }
+        }
+        console.log(gameBoard);
         endTurn();
     }
 }

@@ -1,12 +1,9 @@
 // Global Variables
-let gameRound;
 let currentPlayer;
 let hand;
 let cardElement;
 let cardImage;
-let cardNum = 0;
 let gameStatus = false;
-// let attack;
 
 
 let t0 = document.getElementById('t0');
@@ -37,103 +34,133 @@ const gameBoard =[];
 const player1 = {
     name: 'Player-1',
     class: '1',
+    health: 10,
     // pass data for deck select and profile image
-    duck: localStorage.getItem('player1Duck'),
+    faction: localStorage.getItem('player1Duck'),
     stack: [],
-    deck: [],
-    hand: []
+    hand: [],
+    cardId: 0
 }
 
 const player2 = {
     name: 'Player-2',
     class: '2',
+    health: 10,
     // pass data for deck select and profile image
-    duck: localStorage.getItem('player2Duck'),
+    faction: localStorage.getItem('player2Duck'),
     stack: [],
-    deck: [],
-    hand: []
+    hand: [],
+    cardId: 0
 }
 
-// Arrays of Card Objects
+// Global Card Arrays and Objects
+
+class Deck {
+    constructor(player, faction, number, types) {
+        this.player = player;
+        this.faction = faction;
+        this.number = number;
+        this.types = types
+        this.deck = [];
+        
+    }
+
+    createDeck() {
+        for(let i = 0; i < this.types.length; i++) {
+            let cardType = this.types[i];
+            console.log(`Card Type i: ${cardType}`);
+            this.deck.push(cardType);
+            // for(let i = 0; i < cardType.count; i++) {
+            //     // cardType.id = `${playerClass}-${playerCardId}`;
+            //     this.deck.push(cardType);
+            //     // playerCardId++;
+            //     // console.log(`card Type id: ${cardType.id}`);
+            //     // console.log(`player class: ${playerClass}`);
+            //     // console.log(`playerCardID#(should iterate): ${playerCardId}`);
+            // }
+        }
+        // console.log(playerClass);
+        // console.log(playerCardId);
+
+    }
+    // shuffleDeck()
+}
+
+class CardType {
+    constructor(faction, name, attack, defense, id) {
+        this.faction = faction;
+        this.name = name;
+        this.attack = attack;
+        this.defense = defense;
+        this.imageLink = `assets/cards/${faction}/${name}.png`;
+        this.id = id;
+    }
+}
 
 // GreyDuck Cards
-let greyDucks =[
-    {
-    name: 'angryGreyDuck',
-    attack: 5,
-    defense: 1,
-    imageLink: `assets/cards/greyDucks/angryGreyDuck.png`
-},
-{
-    name: 'suspiciousGreyDuck',
-    attack: 3,
-    defense: 2,
-    imageLink: `assets/cards/greyDucks/suspiciousGreyDuck.png`
-}];
+let greyDucks0 = new CardType ('greyDucks', 'angryGreyDuck', 5, 1, 0);
+let greyDucks1 = new CardType ('greyDucks', 'suspiciousGreyDuck', 3, 2, 1);
+let greyDucks2 = new CardType ('greyDucks', 'angryGreyDuck', 5, 1, 2);
+let greyDucks3 = new CardType ('greyDucks', 'suspiciousGreyDuck', 3, 2, 3);
+let greyDucks4 = new CardType ('greyDucks', 'angryGreyDuck', 5, 1, 4);
+let greyDucks5 = new CardType ('greyDucks', 'suspiciousGreyDuck', 3, 2, 5);
+let greyDucks6 = new CardType ('greyDucks', 'angryGreyDuck', 5, 1, 6);
+let greyDucks7 = new CardType ('greyDucks', 'suspiciousGreyDuck', 3, 2, 7);
+let greyDucksTypes = [greyDucks0, greyDucks1, greyDucks2, greyDucks3, greyDucks4, greyDucks5, greyDucks6, greyDucks7];
 
 // Mallard Cards
-let mallards = [ 
-    {
-    name: 'angryMallard',
-    attack: 5,
-    defense: 1,
-    imageLink: `assets/cards/mallards/angryMallard.png`
-},
-{
-    name: 'suspiciousMallard',
-    attack: 3,
-    defense: 2,
-    imageLink: `assets/cards/mallards/suspiciousMallard.png`
-}];
+let mallards0 = new CardType ('mallards', 'angryMallard', 5, 1, 0);
+let mallards1 = new CardType ('mallards', 'suspiciousMallard', 3, 2, 1);
+let mallards2 = new CardType ('mallards', 'angryMallard', 5, 1, 2);
+let mallards3 = new CardType ('mallards', 'suspiciousMallard', 3, 2, 3);
+let mallards4 = new CardType ('mallards', 'angryMallard', 5, 1, 4);
+let mallards5 = new CardType ('mallards', 'suspiciousMallard', 3, 2, 5);
+let mallards6 = new CardType ('mallards', 'angryMallard', 5, 1, 6);
+let mallards7 = new CardType ('mallards', 'suspiciousMallard', 3, 2, 7);
+let mallardsTypes = [mallards0, mallards1, mallards2, mallards3,mallards4, mallards5, mallards6, mallards7];
 
 // Yeller Cards
+let yellers0 = new CardType ('yellers', 'angryYeller', 5, 1, 0);
+let yellers1 = new CardType ('yellers', 'suspiciousYeller', 3, 2, 1);
+let yellers2 = new CardType ('yellers', 'angryYeller', 5, 1, 2);
+let yellers3 = new CardType ('yellers', 'suspiciousYeller', 3, 2, 3);
+let yellers4 = new CardType ('yellers', 'angryYeller', 5, 1, 4);
+let yellers5 = new CardType ('yellers', 'suspiciousYeller', 3, 2, 5);
+let yellers6 = new CardType ('yellers', 'angryYeller', 5, 1, 6);
+let yellers7 = new CardType ('yellers', 'suspiciousYeller', 3, 2, 7);
+let yellersTypes = [yellers0, yellers1, yellers2, yellers3, yellers4,  yellers5, yellers6, yellers7];
 
-let yellers = [
-    {
-    name: 'angryYeller',
-    attack: 5,
-    defense: 1,
-    imageLink: `assets/cards/yellers/angryYeller.png`
-},
-{
-    name: 'suspiciousYeller',
-    attack: 3,
-    defense: 2,
-    imageLink: `assets/cards/yellers/suspiciousYeller.png`
-}];
-
-// Deck Arrays
-
+// All Types Objects:
 let duckStacks = {
-    greyDucks: greyDucks, 
-    mallards: mallards, 
-    yellers: yellers
-};
+    greyDucks: greyDucksTypes,
+    mallards: mallardsTypes,
+    yellers: yellersTypes
+}
 
 // Team Check and Initializing Game
 gameInit();
 
-// Functions
 
 // Initialize game. Sets score and round, calls functions to build player profiles and choose which player goes first
 function gameInit() {
-    if(player1.duck !== null && player2.duck !== null) {
+    if(player1.faction !== null && player2.faction !== null) {
     gameStatus = true;
 
     // Set player Scores to 0;
     player1.score = 0;
     player2.score = 0;
 
-    // Set Rounds to 1
-    gameRound = 1;
-
     // Initialize gameboard
     gameBoardInit();
 
-    // Look at tic-tac-toe for basics
     // Choose Deck based on team
     buildProfile(player1);
     buildProfile(player2);
+
+    console.log(player1.deck);
+    console.log(player1.hand);
+    console.log(player2.deck);
+    console.log(player2.hand);
 
     // Set current player turn
     coinToss();
@@ -159,8 +186,6 @@ function gameBoardInit() {
         gameBoard.push(`t${i}`)
     }
     return gameBoard;
-
-
 }
 
 // Function to choose which player goes first
@@ -172,26 +197,26 @@ function coinToss() {
         currentPlayer = player2;
     }
 
-    document.getElementById('Game-round').innerText = `${currentPlayer.name}: ${currentPlayer.duck} go first`;
+    document.getElementById('Game-round').innerText = `${currentPlayer.name}: ${currentPlayer.faction} go first`;
 }
 
 // Function to build player profiles. Player object is passed through to build deck and render hand.
 function buildProfile(player) {
         // Set player profile pictures:
-        if(player.duck === 'Random') {
+        if(player.faction === 'Random') {
         let randomSelect = Math.floor(Math.random()*3);
         if(randomSelect === 0) {
-            player.duck = 'greyDucks';
+            player.faction = 'greyDucks';
         } else if (randomSelect === 1) {
-            player.duck = 'yellers';
+            player.faction = 'yellers';
         } else if (randomSelect === 2) {
-            player.duck = 'mallards';
+            player.faction = 'mallards';
         }
     }
    
 
     player.picture = document.getElementById(`${player.name}-pic-play`);
-    player.picture.setAttribute('src', `assets/player-pictures/${player.name}/${player.duck}.png`)
+    player.picture.setAttribute('src', `assets/player-pictures/${player.name}/${player.faction}.png`)
     // Randomly deal cards to each player
     
     buildDeck(player);
@@ -199,27 +224,34 @@ function buildProfile(player) {
 };
 
 // Builds deck and hand for player 2 upon gameInit() -> buildP2Profile()
+
 function buildDeck(player) {
-    // Direction for choosing deck from duckStacks array with for(let[key, value] of Object.entries(object) taken from https://stackoverflow.com/questions/57928690/how-to-display-value-if-key-is-equal-to-variable
     for (let [key, value] of Object.entries(duckStacks)) {
-        if (key === player.duck) {
+        if (key === player.faction) {
             player.stack = value;
         }
     }
-    // build the player hand
-    for (let i = 0; i < 5; i++){
-        //randomly push a value from the selected deck into player 'hand' until 16 cards are held
-        let randomSelect = Math.floor(Math.random()*player.stack.length);
-        player.hand.push(player.stack[randomSelect]);
+    let playerDeck = new Deck(player.name, player.faction, 8, player.stack);
+    playerDeck.createDeck();
+    player.deck = playerDeck.deck;
+    
+    // shuffle deck: Direction taken from https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
+    // Durstenfeld shuffle
+    for (let i = player.deck.length - 1; i > 0; i--) {
+        let j = Math.floor(Math.random() * (i +1))
+        let temporaryLocation = player.deck[i];
+        player.deck[i] = player.deck[j];
+        player.deck[j] = temporaryLocation;
     }
-    //build the rest of the player deck
-    for (let i = 0; i < 11; i++){
-        //randomly push a value from the selected deck into player 'hand' until 16 cards are held
-        let randomSelect = Math.floor(Math.random()*player.stack.length);
-        player.deck.push(player.stack[randomSelect]);
-        // add total card number
+    
+    // Add first 4 cards from deck to player hand:
+    for (let i = 0; i < 4; i++){
+        player.hand.push(player.deck[i])
+        player.deck.splice(i, 1)
     }
+     
 };
+
 
 // Function that Renders player hands
 // Inspiration for renderHand taken from my solution to TMDP_API Lab
@@ -303,11 +335,6 @@ function endTurn() {
         document.querySelector(`.${currentPlayer.name}-view`).classList.toggle(`invisible-hand-${currentPlayer.class}`);
         document.querySelector(`.invisible-hand-${currentPlayer.class}`).style.opacity = "0";
     }
-    // let playerView = document.getElementById(`${currentPlayer.name}-view`);
-    // playerView.style.opacity = "0";
-
-    console.log(currentPlayer.name);
-    console.log(currentPlayer.class);
 
     changePlayer();
 

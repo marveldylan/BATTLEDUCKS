@@ -380,7 +380,7 @@ function dropCard(cardElement) {
             document.querySelector(`.${currentPlayer.name}-attack`).innerText = `ATTACK: ${currentPlayer.attack}`;
         } else if ( document.getElementById(cardTile).classList.contains('def-tile') === true) {
             currentPlayer.defense += parseInt(cardDefense);
-            document.querySelector(`.${currentPlayer.name}-defense`),innerText = `DEFENSE: ${currentPlayer.defense}`;
+            document.querySelector(`.${currentPlayer.name}-defense`).innerText = `DEFENSE: ${currentPlayer.defense}`;
         } else {
             console.log('we have a problem');
         }

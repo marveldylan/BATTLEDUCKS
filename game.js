@@ -3,6 +3,7 @@ let currentPlayer;
 let hand;
 let cardElement;
 let cardImage;
+let gameTurn;
 let gameStatus = false;
 let cardAttack;
 let cardDefense;
@@ -146,7 +147,8 @@ gameInit();
 function gameInit() {
     if(player1.faction !== null && player2.faction !== null) {
     gameStatus = true;
-
+    // Set Game Turn
+    gameTurn = 0;
     // Initialize gameboard
     gameBoardInit();
 
@@ -308,21 +310,42 @@ function endTurn() {
         document.querySelector(`.invisible-hand-${currentPlayer.class}`).style.opacity = "0";
     }
 
+    gameTurn++;
+
     changePlayer();
 
 }
 // Function to change currentPlayer after every move:
 function changePlayer () {
-    // switch current player
-    if (currentPlayer === player1) {
-        currentPlayer = player2;
-    } else if (currentPlayer === player2) {
-        currentPlayer = player1;
+    if(gameTurn < 20) {
+        // switch current player
+        if (currentPlayer === player1) {
+            currentPlayer = player2;
+        } else if (currentPlayer === player2) {
+            currentPlayer = player1;
+        }
+        // display on board
+
+        document.getElementById('Game-round').innerText = `${currentPlayer.name}: ${currentPlayer.faction}' Turn`;
+        // start turn for next player
+        startTurn(currentPlayer);
+    } else {
+        checkWinner();
     }
-    // display on board
-    document.getElementById('Game-round').innerText = `${currentPlayer.name}: ${currentPlayer.faction}' Turn`;
-    // start turn for next player
-    startTurn(currentPlayer);
+}
+
+// Function to check winner:
+function checkWinner() {
+    player1.score = player1.attack - player2.defense;
+    player2.score = player2.attack - player1.defense;
+
+    if(player1.score > player2.score){
+        document.getElementById('Game-round').innerText = `PLAYER 1 SCORE: ${player1.score} PLAYER 2 SCORE: ${player2.score}. PLAYER 1: ${player1.faction} WINS!!`
+    } else if (player2.score > player1.score) {
+        document.getElementById('Game-round').innerText = `PLAYER 1 SCORE: ${player1.score} PLAYER 2 SCORE: ${player2.score}. PLAYER 2: ${player2.faction} WINS!!`
+    } else if (player1.score === player2.score) {
+        document.getElementById('Game-round').innerText = `PLAYER 1 SCORE: ${player1.score} PLAYER 2 SCORE: ${player2.score}. IT'S A DRAW!!`
+    }
 }
 
 // Direction for dragging cards to grid from https://medium.com/@tatismolin/how-to-implement-drag-and-drop-functionality-using-vanilla-javascript-9ddfe2402695

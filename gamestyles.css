@@ -179,7 +179,7 @@ select option:active, select option:checked:after, select option:focus-visible, 
     padding: 20px;
 }
 
-.Player-1-view {
+#Player-1-view {
     grid-column: span 2;
     display: grid;
         grid-template-columns: 1fr 1fr;
@@ -199,7 +199,7 @@ select option:active, select option:checked:after, select option:focus-visible, 
     opacity: 0;
 }
 
-.Player-2-view {
+#Player-2-view {
     grid-column: span 2;
     display: grid;
         grid-template-columns: 1fr 1fr;

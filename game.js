@@ -246,8 +246,8 @@ function renderHand(player) {
 
 function startTurn(player) {
     if (gameStatus === true) {
-        console.log(player.name);
-        console.log(player.class);
+        // console.log(player.name);
+        // console.log(player.class);
         document.getElementById(`${player.name}-hand`).disabled = false;
         document.getElementById(`${player.name}-draw`).disabled = false;
         document.getElementById(`${player.name}-attack`).disabled = false;
@@ -289,6 +289,13 @@ function endTurn() {
     document.getElementById(`${currentPlayer.name}-draw`).classList.toggle('invisible-hand');
     document.getElementById(`${currentPlayer.name}-attack`).classList.toggle('invisible-hand');
 
+    if(document.getElementById(`${currentPlayer.name}-view`).classList.contains(`invisible-hand-${currentPlayer.class}`) !== true) {
+        document.querySelector(`.${currentPlayer.name}-view`).classList.toggle(`invisible-hand-${currentPlayer.class}`);
+        document.querySelector(`.invisible-hand-${currentPlayer.class}`).style.opacity = "0";
+    }
+    // let playerView = document.getElementById(`${currentPlayer.name}-view`);
+    // playerView.style.opacity = "0";
+
     console.log(currentPlayer.name);
     console.log(currentPlayer.class);
 
@@ -328,11 +335,13 @@ function dropCard(cardElement) {
         for(let i = 0; i < 6; i++) {
             if (cardId ===`${currentPlayer.name}-card-element-${i}`) {
                 currentPlayer.hand.splice(i, 1, 'empty');
-                console.log(currentPlayer.hand);
+                // console.log(currentPlayer.hand);
             } else {
-                console.log(`Can't get card id`);
+                // console.log(`Can't get card id`);
             }
         }
+        // console.log(cardElement.target.id);
+        // console.log(cardElement.target.firstElementChild.innerHTML);
         endTurn();
     }
 }

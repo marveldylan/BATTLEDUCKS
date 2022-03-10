@@ -34,6 +34,7 @@ const gameBoard =[];
 // Player Objects
 const player1 = {
     name: 'Player-1',
+    class: '1',
     // pass data for deck select and profile image
     duck: localStorage.getItem('player1Duck'),
     stack: [],
@@ -43,6 +44,7 @@ const player1 = {
 
 const player2 = {
     name: 'Player-2',
+    class: '2',
     // pass data for deck select and profile image
     duck: localStorage.getItem('player2Duck'),
     stack: [],
@@ -200,7 +202,6 @@ function buildDeck(player) {
     for (let [key, value] of Object.entries(duckStacks)) {
         if (key === player.duck) {
             player.stack = value;
-            console.log(player.stack);
         }
     }
     // build the player hand
@@ -215,9 +216,6 @@ function buildDeck(player) {
         let randomSelect = Math.floor(Math.random()*player.stack.length);
         player.deck.push(player.stack[randomSelect]);
     }
-    console.log(player.stack);
-    console.log(player.deck);
-    console.log(player.hand);
 };
 
 // Function that Renders player hands
@@ -240,7 +238,6 @@ function renderHand(player) {
         cardElement.setAttribute("id", `${player.name}-card-element-${i}`);
         cardElement.setAttribute("draggable", "true");
         cardElement.setAttribute("ondragstart", "dragCard(event)");
-        console.log(cardElement);
     }
 
 };
@@ -250,6 +247,7 @@ function renderHand(player) {
 function startTurn(player) {
     if (gameStatus === true) {
         console.log(player.name);
+        console.log(player.class);
         document.getElementById(`${player.name}-hand`).disabled = false;
         document.getElementById(`${player.name}-draw`).disabled = false;
         document.getElementById(`${player.name}-attack`).disabled = false;
@@ -284,8 +282,18 @@ function attack() {
 
 // Function to end turn, save changes to board:
 function endTurn() {
+    document.getElementById(`${currentPlayer.name}-hand`).disabled = true;
+    document.getElementById(`${currentPlayer.name}-draw`).disabled = true;
+    document.getElementById(`${currentPlayer.name}-attack`).disabled = true;
+    document.getElementById(`${currentPlayer.name}-hand`).classList.toggle('invisible-hand');
+    document.getElementById(`${currentPlayer.name}-draw`).classList.toggle('invisible-hand');
+    document.getElementById(`${currentPlayer.name}-attack`).classList.toggle('invisible-hand');
+
+    console.log(currentPlayer.name);
+    console.log(currentPlayer.class);
 
     changePlayer();
+
 }
 // Function to change currentPlayer after every move:
 function changePlayer () {
@@ -325,7 +333,7 @@ function dropCard(cardElement) {
                 console.log(`Can't get card id`);
             }
         }
-    endTurn();
+        endTurn();
     }
 }
 
@@ -333,24 +341,32 @@ function dropCard(cardElement) {
 // Event Handlers
 //inspiration for hover taken from DOTS lab level winner opacity change, but with added toggle to play
 document.getElementById('Player-1-hand').addEventListener('mouseover', () => {
-    document.querySelector('.invisible-hand-1').style.opacity = "1.0";
+    if(document.getElementById('Player-1-view').classList.contains('invisible-hand-1') === true) {
+        document.querySelector('.invisible-hand-1').style.opacity = "1.0";
+    }
 });
 document.getElementById('Player-1-hand').addEventListener('mouseout', () => {
-    document.querySelector('.invisible-hand-1').style.opacity = "0";   
-    // document.querySelector('.Player-1-view').classList.toggle(`.card-element-${i}`);
-    // document.querySelector('.Player-1-view').classList.toggle('.invisible-hand-1');
+    if(document.getElementById('Player-1-view').classList.contains('invisible-hand-1') === true) {
+        document.querySelector('.invisible-hand-1').style.opacity = "0";
+    } 
 });
 document.getElementById('Player-1-hand').addEventListener('click', () => {
-    document.querySelector('.Player-1-view').classList.toggle('invisible-hand-1');
-    // document.querySelector('.Player-1-view').classList.toggle(`.card-element-${i}`);
-    // document.querySelector('.Player-1-view').classList.toggle('.invisible-hand-1');
+    if(document.getElementById('Player-1-view').classList.contains('invisible-hand-1') === true) {
+        document.querySelector('.Player-1-view').classList.toggle('invisible-hand-1');
+    }
 });
 document.getElementById('Player-2-hand').addEventListener('mouseover', () => {
-    document.querySelector('.invisible-hand-2').style.opacity = "1.0";
+    if(document.getElementById('Player-2-view').classList.contains('invisible-hand-2') === true) {
+        document.querySelector('.invisible-hand-2').style.opacity = "1.0";
+    }
 });
 document.getElementById('Player-2-hand').addEventListener('mouseout', () => {
-    document.querySelector('.invisible-hand-2').style.opacity = "0";
+    if(document.getElementById('Player-2-view').classList.contains('invisible-hand-2') === true) {
+        document.querySelector('.invisible-hand-2').style.opacity = "0";
+    }
 });
 document.getElementById('Player-2-hand').addEventListener('click', () => {
-    document.querySelector('.Player-2-view').classList.toggle('invisible-hand-2');
+    if(document.getElementById('Player-2-view').classList.contains('invisible-hand-2') === true) {
+        document.querySelector('.Player-2-view').classList.toggle('invisible-hand-2');
+    }
 });

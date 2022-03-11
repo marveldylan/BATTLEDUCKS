@@ -115,9 +115,10 @@ select option:active, select option:checked:after, select option:focus-visible, 
 }
 
 .start {
-    width: 100%;
+    width: 90%;
     height: 20vh;
-    background-color: green;
+    background-color: #201f1f;
+    border: 2px solid black;
 }
 
 #Start-game {
@@ -126,6 +127,11 @@ select option:active, select option:checked:after, select option:focus-visible, 
     width: 20%;
     height: 10vh;
     font-size: x-large;
+    color:#8aec7f;
+    background-color: #202020;
+    text-shadow: 0px 0px 15px #52f74e;
+    box-shadow: 0px 0px 15px 10px #52f74e;
+    border: 2px solid #8aec7f;
 
 }
 
@@ -396,6 +402,21 @@ select option:active, select option:checked:after, select option:focus-visible, 
 
 .Player-2-tile {
     background-color: rgb(168, 118, 99);
+}
+
+.audio-container {
+    width: 90%;
+    background-color: #878787;
+    border: 2px solid black;
+}
+#toggle-music {
+    display: block;
+    margin: 0 auto;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    background-color:rgb(11, 11, 78);
+    color: whitesmoke;
+    padding: 0.7em;
 }
 
 /* audio button */

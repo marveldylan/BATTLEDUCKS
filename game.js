@@ -94,15 +94,20 @@ class CardType {
 }
 
 // GreyDuck Cards
-let greyDucks0 = new CardType ('greyDucks', 'angryGreyDuck', 5, 1, 0);
-let greyDucks1 = new CardType ('greyDucks', 'suspiciousGreyDuck', 3, 2, 1);
-let greyDucks2 = new CardType ('greyDucks', 'angryGreyDuck', 5, 1, 2);
-let greyDucks3 = new CardType ('greyDucks', 'suspiciousGreyDuck', 3, 2, 3);
-let greyDucks4 = new CardType ('greyDucks', 'angryGreyDuck', 5, 1, 4);
-let greyDucks5 = new CardType ('greyDucks', 'suspiciousGreyDuck', 3, 2, 5);
-let greyDucks6 = new CardType ('greyDucks', 'angryGreyDuck', 5, 1, 6);
-let greyDucks7 = new CardType ('greyDucks', 'suspiciousGreyDuck', 3, 2, 7);
-let greyDucksTypes = [greyDucks0, greyDucks1, greyDucks2, greyDucks3, greyDucks4, greyDucks5, greyDucks6, greyDucks7];
+let greyDucks0 = new CardType ('greyDucks', 'batDuck', 30, 20, 0);
+let greyDucks1 = new CardType ('greyDucks', 'susDuck', 5, 10, 1);
+let greyDucks2 = new CardType ('greyDucks', 'susDuck', 5, 10, 2);
+let greyDucks3 = new CardType ('greyDucks', 'susDuck', 5, 10, 3);
+let greyDucks4 = new CardType ('greyDucks', 'susDuck', 5, 10, 4);
+let greyDucks5 = new CardType ('greyDucks', 'badDuck', 15, 5, 5);
+let greyDucks6 = new CardType ('greyDucks', 'badDuck', 15, 5, 6);
+let greyDucks7 = new CardType ('greyDucks', 'badDuck', 15, 5, 7);
+let greyDucks8 = new CardType ('greyDucks', 'badDuck', 15, 5, 8);
+let greyDucks9 = new CardType ('greyDucks', 'eazDuck', 10, 20, 9);
+let greyDucks10 = new CardType ('greyDucks', 'eazDuck', 10, 20, 10);
+let greyDucks11 = new CardType ('greyDucks', 'eazDuck', 10, 20, 11);
+let greyDucks12 = new CardType ('greyDucks', 'eazDuck', 10, 20, 12);
+let greyDucksTypes = [greyDucks0, greyDucks1, greyDucks2, greyDucks3, greyDucks4, greyDucks5, greyDucks6, greyDucks7, greyDucks8, greyDucks9, greyDucks10, greyDucks11, greyDucks12];
 
 // Mallard Cards
 let mallards0 = new CardType ('mallards', 'angryMallard', 5, 1, 0);
@@ -116,15 +121,20 @@ let mallards7 = new CardType ('mallards', 'suspiciousMallard', 3, 2, 7);
 let mallardsTypes = [mallards0, mallards1, mallards2, mallards3,mallards4, mallards5, mallards6, mallards7];
 
 // Yeller Cards
-let yellers0 = new CardType ('yellers', 'angryYeller', 5, 1, 0);
-let yellers1 = new CardType ('yellers', 'suspiciousYeller', 3, 2, 1);
-let yellers2 = new CardType ('yellers', 'angryYeller', 5, 1, 2);
-let yellers3 = new CardType ('yellers', 'suspiciousYeller', 3, 2, 3);
-let yellers4 = new CardType ('yellers', 'angryYeller', 5, 1, 4);
-let yellers5 = new CardType ('yellers', 'suspiciousYeller', 3, 2, 5);
-let yellers6 = new CardType ('yellers', 'angryYeller', 5, 1, 6);
-let yellers7 = new CardType ('yellers', 'suspiciousYeller', 3, 2, 7);
-let yellersTypes = [yellers0, yellers1, yellers2, yellers3, yellers4,  yellers5, yellers6, yellers7];
+let yellers0 = new CardType ('yellers', 'jedDuck', 25, 25, 0);
+let yellers1 = new CardType ('yellers', '420Duck', 4, 20, 1);
+let yellers2 = new CardType ('yellers', '420Duck', 4, 20, 2);
+let yellers3 = new CardType ('yellers', '420Duck', 4, 20, 3);
+let yellers4 = new CardType ('yellers', '420Duck', 4, 20, 4);
+let yellers5 = new CardType ('yellers', 'ptyDuck', 15, 5, 5);
+let yellers6 = new CardType ('yellers', 'ptyDuck', 15, 5, 6);
+let yellers7 = new CardType ('yellers', 'ptyDuck', 15, 5, 7);
+let yellers8 = new CardType ('yellers', 'ptyDuck', 15, 5, 8);
+let yellers9 = new CardType ('yellers', 'pnkDuck', 10, 15, 9);
+let yellers10 = new CardType ('yellers', 'pnkDuck', 10, 15, 10);
+let yellers11 = new CardType ('yellers', 'pnkDuck', 10, 15, 11);
+let yellers12 = new CardType ('yellers', 'pnkDuck', 10, 15, 12);
+let yellersTypes = [yellers0, yellers1, yellers2, yellers3, yellers4,  yellers5, yellers6, yellers7, yellers8, yellers9, yellers10, yellers11, yellers12];
 
 // All Types Objects:
 let duckStacks = {
@@ -427,6 +437,7 @@ document.getElementById('Player-1-draw').addEventListener('click', ()=> {
             cardElement = document.createElement('div');
             cardElement.classList.add(`card-element`);
             cardElement.classList.add(`card-element-${i}`);
+            cardElement.classList.add(`card-back`);
             cardElement.innerHTML = `<div data-attack='${player1.hand[i].attack}' data-defense = '${player1.hand[i].defense}' ><img class='card-image' src=${player1.hand[i].imageLink}></div>`;
             document.querySelector(`.${player1.name}-view`).appendChild(cardElement);
             cardElement.setAttribute("id", `${player1.name}-card-element-${i}`);
@@ -450,13 +461,12 @@ document.getElementById('Player-2-draw').addEventListener('click', ()=> {
             cardElement = document.createElement('div');
             cardElement.classList.add(`card-element`);
             cardElement.classList.add(`card-element-${i}`);
+            cardElement.classList.add(`card-back`);
             cardElement.innerHTML = `<div  data-attack='${player2.hand[i].attack}' data-defense = '${player2.hand[i].defense}' ><img class='card-image' src=${player2.hand[i].imageLink}></div>`;
             document.querySelector(`.${player2.name}-view`).appendChild(cardElement);
             cardElement.setAttribute("id", `${player2.name}-card-element-${i}`);
             cardElement.setAttribute("draggable", "true");
             cardElement.setAttribute("ondragstart", "dragCard(event)");
-            // cardElement.setAttribute('attack', `${player2.hand[i].attack}`);
-            // cardElement.setAttribute('defense', `${player2.hand[i].defense}`);
             endTurn();
         }
     }

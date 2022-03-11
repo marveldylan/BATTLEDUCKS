@@ -165,7 +165,7 @@ select option:active, select option:checked:after, select option:focus-visible, 
     background-size: 100%;
     display: grid;
     grid-template-columns: 3fr 2fr;
-    grid-template-rows: 65px 1fr 3fr 50px;
+    grid-template-rows: 65px 250px 510px 50px;
     width: 20%;
     background-color: #161616;
     border: 2px solid black;
@@ -176,7 +176,7 @@ select option:active, select option:checked:after, select option:focus-visible, 
     background-size: 100%;
     display: grid;
     grid-template-columns: 2fr 3fr;
-    grid-template-rows: 65px 1fr 3fr 50px;
+    grid-template-rows: 65px 250px 510px 50px;
     width: 20%;
     background-color: #161616;
     border: 2px solid black;
@@ -238,7 +238,17 @@ select option:active, select option:checked:after, select option:focus-visible, 
     grid-column: span 2;
     display: grid;
         grid-template-columns: 1fr 1fr;
-        grid-gap: 2px;
+        grid-template-rows: 1fr 1fr;
+        grid-gap: 4px;
+        opacity: 1;
+}
+
+#Player-2-view {
+    grid-column: span 2;
+    display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+        grid-gap: 4px;
         opacity: 1;
 }
 
@@ -289,23 +299,22 @@ select option:active, select option:checked:after, select option:focus-visible, 
 
 .invisible-hand {
     opacity: 0;
+
 }
 
 .invisible-hand-1 {
     opacity: 0;
+
 }
 
 .invisible-hand-2 {
     opacity: 0;
+
 }
 
-#Player-2-view {
-    grid-column: span 2;
-    display: grid;
-        grid-template-columns: 1fr 1fr;
-        grid-gap: 2px;
-        opacity: 1;
-}
+
+
+
 
 .Player-1-attack {
     padding-top: 25px;
@@ -334,6 +343,7 @@ select option:active, select option:checked:after, select option:focus-visible, 
     color: #90baf8;
     text-shadow: 0px 0px 10px #4955ff;
 }
+
 
 
 .card-element {
@@ -376,9 +386,13 @@ select option:active, select option:checked:after, select option:focus-visible, 
     margin: 0 auto;
 }
 
+.card-back {
+    background-image: url('assets/player-pictures/cardBack.png');
+}
+
 .card-background {
     width: 100%;
-    background-image: url('assets/player-pictures/Player-1/Random.png');
+    background-image: url('assets/player-pictures/cardBackground.png');
     height: 100%;
 }
 
@@ -391,7 +405,7 @@ select option:active, select option:checked:after, select option:focus-visible, 
 #Game-board {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-    grid-template-rows: 65px 1fr 1fr 1fr 1fr 50px;
+    grid-template-rows: 65px 190px 190px 190px 190px 50px;
     grid-gap: 2px;
 }
 

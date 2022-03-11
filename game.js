@@ -202,7 +202,7 @@ function buildProfile(player) {
    
 
     player.picture = document.getElementById(`${player.name}-pic-play`);
-    player.picture.setAttribute('src', `assets/player-pictures/${player.name}/${player.faction}.png`)
+    player.picture.setAttribute('src', `assets/player-pictures/${player.name}/${player.faction}.gif`)
     // Randomly deal cards to each player
     
     buildDeck(player);

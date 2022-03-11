@@ -6,6 +6,9 @@
 
  ### [Github](https://github.com/marveldylan) | [Twitter](https://twitter.com/dmarv77) | [LinkedIn](https://www.linkedin.com/in/dylan-marvel/)
  ***
+ ![Image](assets/player-pictures/BattleDucks.png)
+ ## ***PLAY NOW ON [SURGE.SH](https://battleducks-dm.surge.sh/)***
+  &nbsp;
  ## ***DESCRIPTION***
  ### BATTLEDUCKS is a high-octane, turn-based, duck-themed card game for two players! Elements of BATTLEDUCKS are inspired by popular virtual and real-life card games, such as [GWENT: The Witcher Card Game](https://www.playgwent.com/en), [Epic Spell Wars](https://cryptozoic.com/collections/epic-spell-wars), and [Blackjack](https://en.wikipedia.org/wiki/Blackjack). Everyone knows that ducks are competitive creatures by nature, and we've gathered the coolest, best ducks around to compete in the fiery crucible that is BATTLEDUCKS!!!
  &nbsp;
@@ -38,7 +41,7 @@
 ![Image](assets/bd_screenshot.png)
 #### Player 1 has laid three Regular Gray Ducks. Player 2 has laid two Regular Gray Ducks. Player 2 must play their final card to complete the round. Current score for each player is shown on their respective sides. Buttons added for viewing deck and selecting a current card to place.
 
-## **Instructions**
+## **Instructions for Developers**
 * Fork and clone this repo
 * Navigate to project folder
 * Open index.html

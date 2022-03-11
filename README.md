@@ -44,13 +44,13 @@
 
 ## ***Future Updates***
 - [X] ~~Submit README.md~~
-- [ ] Create Game Board
-- [ ] Create Basic Game Assets for Testing Logic
-- [ ] Implement Game Initialization Logic
-- [ ] Implement Round Logic
-- [ ] Create Win Conditions
-- [ ] Create Draw Conditions w/ HOLD card
-- [ ] Stylize Game and Assets
+- [X] Create Game Board
+- [X] Create Basic Game Assets for Testing Logic
+- [X] Implement Game Initialization Logic
+- [ ] ~~Implement Round Logic~~ (Changed to single round)
+- [X] Create Win Conditions
+- [ ] ~~Create Draw Conditions w/ HOLD card~~ (Omitted HOLD card mechanics)
+- [X] Stylize Game and Assets
 - [ ] Add Extra DUCK Cards and Special Features
 
 ### **CHECK OUT MORE ON [TRELLO](https://trello.com/b/nj7qNTKf/project-1)**
@@ -59,4 +59,6 @@
 ## ***Credits***
 ### **SITE / GAME BOARD MOCK-UPS BUILT WITH: [FIGMA](https://www.figma.com/)**
 ### **ASSET MOCK-UPS BUILT WITH: [PISKEL](https://www.piskelapp.com/) & [GRAVIT](https://www.designer.io/en/)**
+### ** FINAL SITE / GAME BOARD / CARD ASSETS  BUILT WITH: [PISKEL](https://www.piskelapp.com/), [GRAVIT](https://www.designer.io/en/) & [PROCREATE}(https://procreate.art/)**
+### ** MUSIC MADE WITH: [REASON COMPACT](https://www.reasonstudios.com/mobile-apps)**
 

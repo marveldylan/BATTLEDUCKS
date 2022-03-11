@@ -57,12 +57,3 @@ document.getElementById('Player-2-choice').addEventListener('change', changeP2Im
 document.getElementById('Ready-p1').addEventListener('click', readyUpP1);
 document.getElementById('Ready-p2').addEventListener('click', readyUpP2);
 document.getElementById('Start-game').addEventListener('click', startGame);
-document.getElementById('toggle-music').addEventListener('click', () => {
-    let music = document.getElementById('music-player');
-    if(music.muted !== true) {
-        music.muted = true;
-    } else if(music.muted === true) {
-        music.muted = false;
-    }
-})
-//

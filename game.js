@@ -7,8 +7,8 @@ let gameTurn;
 let gameStatus = false;
 let cardAttack;
 let cardDefense;
-let fightMusic = new Audio('/assets/audio-files/sejifuji.wav');
-fightMusic.play();
+// let fightMusic = new Audio('/assets/audio-files/sejifuji.wav');
+// fightMusic.play();
 
 
 let t0 = document.getElementById('t0');
@@ -78,14 +78,6 @@ class Deck {
         for(let i = 0; i < this.types.length; i++) {
             let cardType = this.types[i];
             this.deck.push(cardType);
-            // for(let i = 0; i < cardType.count; i++) {
-            //     // cardType.id = `${playerClass}-${playerCardId}`;
-            //     this.deck.push(cardType);
-            //     // playerCardId++;
-            //     // console.log(`card Type id: ${cardType.id}`);
-            //     // console.log(`player class: ${playerClass}`);
-            //     // console.log(`playerCardID#(should iterate): ${playerCardId}`);
-            // }
         }
     }
 }
@@ -254,44 +246,19 @@ function renderHand(player) {
     
     for(let i = 0; i < hand.length; i++) {
         cardElement = document.createElement('div');
-        // cardImage = document.createElement('div');
-        // attack = document.createElement('button');
-        // cardElement.innerHTML = `${hand[i].name}, ATK: ${hand[i].attack}, DEF: ${hand[i].defense}`;
         cardElement.classList.add(`card-element`);
         cardElement.classList.add(`card-element-${i}`);
-        cardElement.innerHTML = `<div  data-attack='${hand[i].attack}' data-defense = '${hand[i].defense}' ><img class='card-image' src=${hand[i].imageLink}></div>`;
-        // attack.innerHTML = 'attack';
+        cardElement.innerHTML = `<div  class = 'card-background' data-attack='${hand[i].attack}' data-defense = '${hand[i].defense}' ><img class='card-image' src=${hand[i].imageLink}></div>`;
         document.querySelector(`.${player.name}-view`).appendChild(cardElement);
-        // cardElement.appendChild(cardImage);
-        // cardElement.style.backgroundImage = `url(${hand[i].imageLink})`;
-        // cardElement.appendChild(playCard);
         cardElement.setAttribute("id", `${player.name}-card-element-${i}`);
         cardElement.setAttribute("draggable", "true");
         cardElement.setAttribute("ondragstart", "dragCard(event)");
-        // cardElement.setAttribute('attack', `${hand[i].attack}`);
-        // cardElement.setAttribute('defense', `${hand[i].defense}`);
     }
 
 };
 
-// function renderHand2(player, num) {
-//     hand = player.hand;
-//     for(let i = 0; i < num; i++) {
-//         cardElement = document.createElement('div');
-//         attack = document.createElement('button');
-//         cardElement.classList.add(`card-element`);
-//         cardElement.setAttribute('attack', `${hand[i].attack}`);
-//         cardElement.setAttribute('defense', `${hand[i].defense}`);
-
-//     }
-// }
-
-// Function for player move:
-
 function startTurn(player) {
     if (gameStatus === true) {
-        // console.log(player.name);
-        // console.log(player.class);
         document.getElementById(`${player.name}-hand`).disabled = false;
         document.getElementById(`${player.name}-draw`).disabled = false;
         document.getElementById(`${player.name}-hand`).classList.toggle('invisible-hand');
@@ -327,7 +294,6 @@ function changePlayer () {
             currentPlayer = player1;
         }
         // display on board
-
         document.getElementById('Game-round').innerText = `${currentPlayer.name}: ${currentPlayer.faction}' Turn`;
         // start turn for next player
         startTurn(currentPlayer);
@@ -357,7 +323,7 @@ function dragCard(cardElement) {
     cardAttack = cardElement.target.firstElementChild.dataset.attack;
     cardDefense = cardElement.target.firstElementChild.dataset.defense;
 }
-// cardElement.target.id
+
 // Function for card dragover game board tiles
 function dragOverCard(cardElement) {
     cardElement.preventDefault();
@@ -380,8 +346,6 @@ function dropCard(cardElement) {
             if (cardId ===`${currentPlayer.name}-card-element-${i}`) {
                 currentPlayer.hand.splice(i, 1, 'empty');
                 console.log(currentPlayer.hand);
-            } else {
-                // console.log(`Can't get card id`);
             }
         }
                 
@@ -497,3 +461,12 @@ document.getElementById('Player-2-draw').addEventListener('click', ()=> {
         }
     }
 });
+
+document.getElementById('mute').addEventListener('click', () => {
+    let music = document.getElementById('player');
+    if(music.muted !== true) {
+        music.muted = true;
+    } else if(music.muted === true) {
+        music.muted = false;
+    }
+})

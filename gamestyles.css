@@ -1,11 +1,11 @@
 /*Choose and Play Web Page Styling:*/
 body {
-    background-color: yellow;
-    font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    background-image: url('assets/player-pictures/background.svg');
+    font-family: 'VT323', monospace;
 }
 
 header {
-    background-color: red;
+    background-color: rgb(11, 11, 78);
     width: 90%;
     margin: 0 auto;
 }
@@ -15,22 +15,36 @@ header {
     justify-content: center;
 }
 
+.logo {
+    display: block;
+    margin: 0 auto;
+    padding: 10px;
+}
+
 /*Choose Deck Styling*/
 .column-choose {
     width: 45%;
-    background-color: blue;
+    background-color: #878787;
     border: 2px solid black;
     height: 50vh;
 }
 
 .p1-header {
-    text-align: center;
-    background-color: blue;
+    text-align: left;
+    color: white;
+    background-color: rgb(11, 11, 78);
+    border: 2px solid rgb(0, 0, 34);
+    padding: 10px;
+    padding-left: 30px;
 }
 
 .p2-header {
-    text-align: center;
-    background-color: red;
+    text-align: right;
+    color: white;
+    background-color: rgb(240, 174, 148);
+    border: 2px solid #d68869;
+    padding: 10px;
+    padding-right: 30px;
 }
 
 .player-pic {
@@ -119,38 +133,46 @@ select option:active, select option:checked:after, select option:focus-visible, 
 
 /*Play Styling*/
 .grid-player1 {
+    background-image: url('assets/player-pictures/hand-background.svg');
+    background-size: 100%;
     display: grid;
     grid-template-columns: 3fr 2fr;
     grid-template-rows: 65px 1fr 3fr 50px;
     width: 20%;
-    background-color: blue;
+    background-color: #161616;
     border: 2px solid black;
 }
 
 .grid-player2 {
+    background-image: url('assets/player-pictures/hand-background.svg');
+    background-size: 100%;
     display: grid;
     grid-template-columns: 2fr 3fr;
     grid-template-rows: 65px 1fr 3fr 50px;
     width: 20%;
-    background-color: blue;
+    background-color: #161616;
     border: 2px solid black;
 }
 
 .p-head {
     grid-column: span 2;
-    background-color: aqua;
+    background-color: #878787;
 }
 
 .p-profile {
-    background-color: orange;
+    background-image: url('assets/player-pictures/tvFrame.svg');
+    background-size: 100%;
 }
 
 .p-tracker {
-    background-color: purple;
+    background-image: url('assets/player-pictures/tracker.svg');
+    background-size: 100%;
 }
 
 .p-actions {
-    background-color: coral;
+    padding-top: 7px;
+    text-align: center;
+    color: #363636;
 }
 
 .p-view {
@@ -159,24 +181,27 @@ select option:active, select option:checked:after, select option:focus-visible, 
 
 .p-foot {
     grid-column: span 2;
-    background-color: aquamarine;
+    color: #363636;
 }
 
 .column-board {
     width: 50%;
-    background-color: green;
+    background-color: #262626;
+    border: 5px solid #878787;
 }
 
 #Player-1-pic-play {
-    float: left;
-    width: 80%;
-    padding: 20px;
+    display: block;
+    margin: 0 auto;
+    width: 71%;
+    padding: 24px 20px 20px 20px;
 }
 
 #Player-2-pic-play {
-    float: right;
-    width: 80%;
-    padding: 20px;
+    display: block;
+    margin: 0 auto;
+    width: 71%;
+    padding: 24px 20px 20px 20px;
 }
 
 #Player-1-view {
@@ -185,6 +210,51 @@ select option:active, select option:checked:after, select option:focus-visible, 
         grid-template-columns: 1fr 1fr;
         grid-gap: 2px;
         opacity: 1;
+}
+
+#Player-1-hand {
+    display: block;
+    margin: 0 auto;
+    margin-top: -6px;
+    margin-bottom: 4px;
+    padding: 3px;
+    background-color:#51A548;
+    border-color: #112b0e;
+    color: #c6ffbf;
+    font-size: medium;
+}
+#Player-1-draw {
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 8px;
+    padding: 3px;
+    background-color:#1D4B98;
+    border-color: #0d357a;
+    color: #b2c8f0;
+    font-size: medium;
+}
+
+#Player-2-hand{
+    display: block;
+    margin: 0 auto;
+    margin-top: -6px;
+    margin-bottom: 4px;
+    padding: 3px;
+    background-color:#51A548;
+    border-color: #112b0e;
+    color: #c6ffbf;
+    font-size: medium;
+}
+
+#Player-2-draw {
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 8px;
+    padding: 3px;
+    background-color:#1D4B98;
+    border-color: #0d357a;
+    color: #b2c8f0;
+    font-size: medium;
 }
 
 .invisible-hand {
@@ -205,6 +275,34 @@ select option:active, select option:checked:after, select option:focus-visible, 
         grid-template-columns: 1fr 1fr;
         grid-gap: 2px;
         opacity: 1;
+}
+
+.Player-1-attack {
+    padding-top: 25px;
+    text-align: center;
+    color: #f8e090;
+    text-shadow: 0px 0px 10px #faab00;
+}
+
+.Player-1-defense {
+    padding-top: 9px;
+    text-align: center;
+    color: #90baf8;
+    text-shadow: 0px 0px 10px #4955ff;
+}
+
+.Player-2-attack {
+    padding-top: 25px;
+    text-align: center;
+    color: #f8e090;
+    text-shadow: 0px 0px 10px #faab00;
+}
+
+.Player-2-defense {
+    padding-top: 9px;
+    text-align: center;
+    color: #90baf8;
+    text-shadow: 0px 0px 10px #4955ff;
 }
 
 
@@ -242,10 +340,24 @@ select option:active, select option:checked:after, select option:focus-visible, 
 }
 
 .card-image {
-    width: 20%;
+    display: block;
+    width: 90%;
+    padding-top: 10px;
+    margin: 0 auto;
+}
+
+.card-background {
+    width: 100%;
+    background-image: url('assets/player-pictures/Player-1/Random.png');
+    height: 100%;
 }
 
 /* Game Board Styling*/
+#Game-round {
+    font-size: xx-large;
+    color: #8aec7f;
+    text-shadow: 0px 0px 25px #51A548;
+}
 #Game-board {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
@@ -269,19 +381,27 @@ select option:active, select option:checked:after, select option:focus-visible, 
 }
 
 .atk-tile {
-    border: 2px solid red;
+    border: 2px solid #fae4b4;
+    box-shadow: 0px 0px 10px #faab00;
 }
 
 .def-tile {
-    border: 2px solid blue;
+    border: 2px solid rgb(180, 180, 207);
+    box-shadow: 0px 0px 10px #4955ff;
 }
 
 .Player-1-tile {
-    background-color: lightblue;
+    background-color: rgb(60, 60, 88);
 }
 
 .Player-2-tile {
-    background-color: lightcoral;
+    background-color: rgb(168, 118, 99);
+}
+
+/* audio button */
+#mute {
+    display: block;
+    margin: 0 auto;
 }
 
 @media screen and (min-width: 900px) and (max-width: 1200px) {
